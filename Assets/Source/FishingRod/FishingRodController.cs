@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -8,8 +9,12 @@ public class FishingRodController : MonoBehaviour
     [SerializeField] private Rigidbody hookRb;
 
     [SerializeField] private Transform castSpp;
+
+    [SerializeField] private Transform camera;
     
     [SerializeField] private Transform hookSpp;
+
+    [SerializeField] private float castSpeed;
     
     private InputHandler _inputHandler;
 
@@ -17,12 +22,24 @@ public class FishingRodController : MonoBehaviour
 
     private bool _isCasted;
     
+    private float castTimer;
+    
+    private float maxCastTimer = 2;
+    
     [Inject]
     public void Construct(InputHandler input)
     {
         _inputHandler = input;
 
         _inputHandler.OnCast += Cast;
+    }
+
+    private void FixedUpdate()
+    {
+        if (_startCasting && castTimer < maxCastTimer)
+        {
+            castTimer += Time.fixedDeltaTime;
+        }
     }
 
     private void Cast(bool cast)
@@ -38,6 +55,8 @@ public class FishingRodController : MonoBehaviour
             
             hookRb.isKinematic = true;
             
+            castTimer = 0;
+            
         }
         else if (cast && !_startCasting)
         {
@@ -46,6 +65,8 @@ public class FishingRodController : MonoBehaviour
             _isCasted = false;
             
             animatorRod.SetBool("Casting", true);
+
+            castTimer = 0;
         }
         else if (!cast && _startCasting)
         {
@@ -59,7 +80,7 @@ public class FishingRodController : MonoBehaviour
             hookRb.transform.parent = null;
             
             hookRb.linearVelocity = Vector3.zero;
-            hookRb.AddForce(castSpp.forward * 5, ForceMode.Impulse);
+            hookRb.AddForce(camera.forward * castTimer * castSpeed, ForceMode.Impulse);
         }
     }
 }
