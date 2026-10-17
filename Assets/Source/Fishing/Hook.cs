@@ -81,7 +81,8 @@ public class Hook : MonoBehaviour
         
         
     }
-
+    
+    
 
     private void BackToSpp(bool withFish = false)
     {
@@ -108,6 +109,25 @@ public class Hook : MonoBehaviour
     public void SetFish(Fish fish)
     {
         _fish = fish;
+    }
+
+    public Fish ThrowFish(Transform pos)
+    {
+        _fish.StoreFish(pos);
+        
+        Fish fish = _fish;
+        
+        _fish = null;
+
+        _isOnHook = false;
+        
+        return fish;
+        
+    }
+
+    public bool HasFish()
+    {
+        return _fish != null;
     }
 
     public void SetIsOnHook(bool isOnHook)

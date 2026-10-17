@@ -14,16 +14,24 @@ public class InputHandler
     
     public event Action<bool> OnCast;
 
+    public event Action<bool> OnInteract;
+
     public InputHandler()
     {
         _actions = new InputSystem_Actions();
         
         _actions.Player.Move.performed += HandleMove;
         _actions.Player.Move.canceled  += HandleMove;
+        
         _actions.Player.Look.performed += HandleLook;
         _actions.Player.Look.canceled += HandleLook;
+        
         _actions.Player.Attack.performed += HandleCast;
         _actions.Player.Attack.canceled += HandleCast;
+        
+        _actions.Player.Interact.performed += HandleInteract;
+        _actions.Player.Interact.canceled += HandleInteract;
+        
         _actions.Player.Enable();
     }
 
@@ -31,10 +39,15 @@ public class InputHandler
     {
         _actions.Player.Move.performed -= HandleMove;
         _actions.Player.Move.canceled  -= HandleMove;
+        
         _actions.Player.Look.performed -= HandleLook;
         _actions.Player.Look.canceled -= HandleLook;
+        
         _actions.Player.Attack.performed -= HandleCast;
         _actions.Player.Attack.canceled -= HandleCast;
+        
+        _actions.Player.Interact.performed -= HandleInteract;
+        _actions.Player.Interact.canceled -= HandleInteract;
         _actions.Player.Disable();
         _currentMove = Vector2.zero;
       
@@ -62,6 +75,13 @@ public class InputHandler
         bool click = ctx.ReadValue<float>() > 0.5f;
         
         OnCast?.Invoke(click);
+    }
+
+    private void HandleInteract(InputAction.CallbackContext ctx)
+    {
+        bool click = ctx.ReadValue<float>() > 0.5f;
+        
+        OnInteract?.Invoke(click);
     }
 
     public Vector2 GetMovementDirection() => new(_currentMove.x, _currentMove.y);
