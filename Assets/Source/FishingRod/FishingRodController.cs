@@ -39,6 +39,8 @@ public class FishingRodController : MonoBehaviour
         if (_startCasting && castTimer < maxCastTimer)
         {
             castTimer += Time.fixedDeltaTime;
+            
+            print(castTimer);
         }
     }
 
