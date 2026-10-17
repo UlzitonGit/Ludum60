@@ -4,23 +4,18 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class FishingLine : MonoBehaviour
 {
-    [Header("Points")]
-    [SerializeField] private Transform startPoint;   // кончик удочки
-    [SerializeField] private Transform endPoint;     // поплавок / крючок
 
-    [Header("Sag")]
-    [Tooltip("Максимальное провисание в метрах")]
+    [SerializeField] private Transform startPoint;  
+    [SerializeField] private Transform endPoint;    
+
+
     [SerializeField] private float maxSag = 0.5f;
-    [Tooltip("Дистанция, на которой провисание достигает максимума")]
+
     [SerializeField] private float sagDistance = 10f;
-    [Tooltip("Скорость реакции на изменение натяжения")]
     [SerializeField] private float sagSmooth = 8f;
-
-    [Header("Resolution")]
+    
     [SerializeField] private int segments = 20;
-
-    [Header("Wobble")]
-    [Tooltip("Амплитуда колебаний лески")]
+    
     [SerializeField] private float wobbleAmplitude = 0.02f;
     [SerializeField] private float wobbleFrequency = 3f;
 

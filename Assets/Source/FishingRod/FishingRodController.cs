@@ -4,17 +4,15 @@ using Zenject;
 
 public class FishingRodController : MonoBehaviour
 {
-    [SerializeField] private Animator animatorRod;
+    [SerializeField] private Animator _animatorRod;
 
-    [SerializeField] private Rigidbody hookRb;
+    [SerializeField] private Transform _castSpp;
 
-    [SerializeField] private Transform castSpp;
+    [SerializeField] private Transform _camera;
 
-    [SerializeField] private Transform camera;
-    
-    [SerializeField] private Transform hookSpp;
+    [SerializeField] private Hook _hook;
 
-    [SerializeField] private float castSpeed;
+    [SerializeField] private float _castSpeed;
     
     private InputHandler _inputHandler;
 
@@ -22,9 +20,9 @@ public class FishingRodController : MonoBehaviour
 
     private bool _isCasted;
     
-    private float castTimer;
+    private float _castTimer;
     
-    private float maxCastTimer = 2;
+    private float _maxCastTimer = 2;
     
     [Inject]
     public void Construct(InputHandler input)
@@ -34,55 +32,83 @@ public class FishingRodController : MonoBehaviour
         _inputHandler.OnCast += Cast;
     }
 
+    private void OnDisable()
+    {
+        if (_inputHandler != null)
+        {
+            _inputHandler.OnCast -= Cast;
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (_inputHandler != null)
+        {
+            _inputHandler.OnCast += Cast;
+        }
+    }
+
     private void FixedUpdate()
     {
-        if (_startCasting && castTimer < maxCastTimer)
+        if (_startCasting && _castTimer < _maxCastTimer)
         {
-            castTimer += Time.fixedDeltaTime;
-            
-            print(castTimer);
+            _castTimer += Time.fixedDeltaTime;
         }
     }
 
     private void Cast(bool cast)
     {
-
-        if (_isCasted && cast)
+        if (_hook.IsOnHook && cast)
+        {
+            _hook.HookInteract();
+            _animatorRod.SetTrigger("Strike");
+        }
+        
+        else if (_isCasted && cast && !_hook.IsOnHook)
         {
             _isCasted = false;
             
-            hookRb.transform.position = hookSpp.transform.position;
+            _hook.SetIsCasted(false);
             
-            hookRb.transform.parent = hookSpp.transform;
+            _hook.HookInteract();
             
-            hookRb.isKinematic = true;
-            
-            castTimer = 0;
+            _castTimer = 0;
             
         }
-        else if (cast && !_startCasting)
+        else if (cast && !_startCasting && !_isCasted)
         {
             _startCasting = true;
 
             _isCasted = false;
             
-            animatorRod.SetBool("Casting", true);
+            _hook.SetIsCasted(false);
+            
+            _animatorRod.SetBool("Casting", true);
 
-            castTimer = 0;
+            _castTimer = 0;
         }
-        else if (!cast && _startCasting)
+        else if (!cast && _startCasting  && !_isCasted)
         {
             _startCasting = false;
             
+            _hook.SetIsCasted(true);
+            
+            _hook.SetIsOnHook(false);
+            
             _isCasted = true;
+
+            _hook.HookInteract();
             
-            animatorRod.SetBool("Casting", false);
+            _hook.ApplyForwardImpulse(_camera, _castTimer * _castSpeed);
             
-            hookRb.isKinematic = false;
-            hookRb.transform.parent = null;
-            
-            hookRb.linearVelocity = Vector3.zero;
-            hookRb.AddForce(camera.forward * castTimer * castSpeed, ForceMode.Impulse);
+            _animatorRod.SetBool("Casting", false);
         }
+    }
+
+    public void SetIsCasted(bool isCasted)
+    {
+        _isCasted = isCasted;
+        
+        _startCasting = false;
     }
 }
