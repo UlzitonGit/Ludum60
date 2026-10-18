@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -12,6 +14,8 @@ public class FishArea : MonoBehaviour
     [SerializeField] private float[] durationBorders;
     
     [SerializeField] private FishingLine fishingLine;
+    
+    private LuresSO activeLure;
     
     private Hook hook;
     
@@ -42,11 +46,37 @@ public class FishArea : MonoBehaviour
         }
     }
 
+    public void SetActiveLure(LuresSO lure)
+    {
+        activeLure = lure;
+    }
+
     IEnumerator Delay()
     {
         yield return new WaitForSeconds(Random.Range(durationBorders[0], durationBorders[1]));
 
-        Fish fish = fishesSo.fishes[Random.Range(0, fishesSo.fishes.Length)];
+        List<Fish> fishesToCatch = new List<Fish>();
+        
+        foreach (var fishes in fishesSo.fishes)
+        {
+            if (activeLure.fishesToCatch.Contains(fishes))
+            {
+                fishesToCatch.Add(fishes);
+            }
+        }
+        
+        int chance = Random.Range(0, 100);
+
+        int i = 0;
+
+        foreach (int chanceC in activeLure.catchChance)
+        {
+            if (chance < chanceC)
+                break;
+            i++;
+        }
+        
+        Fish fish = activeLure.fishesToCatch[i];
         
         Fish spawnedFish = Instantiate(fish, hook.transform.position, Quaternion.identity).GetComponent<Fish>();
         

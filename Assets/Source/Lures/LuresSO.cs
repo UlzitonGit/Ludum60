@@ -10,4 +10,7 @@ public class LuresSO : ScriptableObject
 
     [SerializeField] public string type;
     [SerializeField] public string name;
+
+    [SerializeField] public Fish[] fishesToCatch;
+    [SerializeField] public float[] catchChance;
 }

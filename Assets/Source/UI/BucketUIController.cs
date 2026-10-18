@@ -103,7 +103,7 @@ public class BucketUIController : MonoBehaviour
            _freeCards.RemoveAt(0);
            
            _busyCards.Add(card);
-           
+           _addFish.gameObject.SetActive(false);
        }
     }
 

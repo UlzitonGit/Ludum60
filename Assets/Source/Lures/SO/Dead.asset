@@ -12,8 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d2a96b58fc75424b8d43da905680339, type: 3}
   m_Name: Dead
   m_EditorClassIdentifier: Assembly-CSharp::LuresSO
-  Wires: 35
-  Huts: 40
-  Bolts: 20
+  Wires: 10
+  Huts: 15
+  Bolts: 12
   type: mid
   name: Dead lure
+  fishesToCatch:
+  - {fileID: 1711321429722611452, guid: 7f137e5c33155c84daae140330cf94f5, type: 3}
+  - {fileID: 1711321429722611452, guid: 4d2014b77e704704784aba035e3e603a, type: 3}
+  - {fileID: 1711321429722611452, guid: 30781382b1c51554999ad46af2d9dfd3, type: 3}
+  - {fileID: 1711321429722611452, guid: 93257b19714623648905fe19f9ba1dc9, type: 3}
+  catchChance:
+  - 25
+  - 50
+  - 75
+  - 100

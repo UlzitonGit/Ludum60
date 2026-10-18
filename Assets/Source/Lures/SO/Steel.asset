@@ -12,8 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d2a96b58fc75424b8d43da905680339, type: 3}
   m_Name: Steel
   m_EditorClassIdentifier: Assembly-CSharp::LuresSO
-  Wires: 45
-  Huts: 50
-  Bolts: 30
+  Wires: 5
+  Huts: 25
+  Bolts: 6
   type: mid
   name: Steel lure
+  fishesToCatch:
+  - {fileID: 1711321429722611452, guid: 4d2014b77e704704784aba035e3e603a, type: 3}
+  - {fileID: 1711321429722611452, guid: 3f0cc6370b61e0744aa6647fe5019384, type: 3}
+  - {fileID: 1711321429722611452, guid: 5ab336116d137b94c997cf72f1c2360f, type: 3}
+  catchChance:
+  - 30
+  - 70
+  - 100

@@ -12,8 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d2a96b58fc75424b8d43da905680339, type: 3}
   m_Name: Fly
   m_EditorClassIdentifier: Assembly-CSharp::LuresSO
-  Wires: 5
-  Huts: 10
-  Bolts: 5
+  Wires: 0
+  Huts: 5
+  Bolts: 8
   type: small
   name: Fly lure
+  fishesToCatch:
+  - {fileID: 1711321429722611452, guid: 0e079b49eed3f51449f594621f2ce6a1, type: 3}
+  - {fileID: 1711321429722611452, guid: 93257b19714623648905fe19f9ba1dc9, type: 3}
+  - {fileID: 1711321429722611452, guid: 3417c70d38fffdf4eaa25f4f9ba33f0c, type: 3}
+  catchChance:
+  - 5
+  - 40
+  - 100

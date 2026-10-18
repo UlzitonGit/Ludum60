@@ -17,3 +17,13 @@ MonoBehaviour:
   Bolts: 0
   type: small
   name: Regular lure
+  fishesToCatch:
+  - {fileID: 1711321429722611452, guid: 3417c70d38fffdf4eaa25f4f9ba33f0c, type: 3}
+  - {fileID: 1711321429722611452, guid: 5ab336116d137b94c997cf72f1c2360f, type: 3}
+  - {fileID: 1711321429722611452, guid: 6e19143e49eb3c54f959ceb102cddf89, type: 3}
+  - {fileID: 1711321429722611452, guid: dc12b270c865a9b438935714869bda59, type: 3}
+  catchChance:
+  - 25
+  - 50
+  - 75
+  - 100

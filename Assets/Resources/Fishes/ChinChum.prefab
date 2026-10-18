@@ -4911,7 +4911,7 @@ GameObject:
   - component: {fileID: 7173428780338194035}
   - component: {fileID: 1711321429722611452}
   m_Layer: 0
-  m_Name: tuna
+  m_Name: ChinChum
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -4947,7 +4947,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fish
   _scaleComponent: {fileID: 8386901836401028545}
-  fishData: {fileID: 11400000, guid: 7da7a4af1459deb44a2ccf2988ce0a7f, type: 2}
+  fishData: {fileID: 11400000, guid: 6f620ac5a51b675488755dc462737688, type: 2}
   fightDirection: {x: 1, y: 0, z: 1}
   _effects: {fileID: 903300448160012803}
 --- !u!1 &8037792328299082748

@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27b34bd7b6f08ff4c9ea0db562167a63, type: 3}
-  m_Name: Tuna
+  m_Name: Kushtata 18
   m_EditorClassIdentifier: Assembly-CSharp::FishDataSO
-  minWeight: 0.5
-  maxWeight: 3
-  name: tuna
+  minWeight: 1
+  maxWeight: 4
+  name: Kushtata 18
   description: verity
   sprite: {fileID: 21300000, guid: ce611467c3b425a41bf220b1490bcdb7, type: 3}
-  bloodLevel: 10
-  oxygenLevel: 15
-  _forwardForce: 2.5
+  bloodLevel: -50
+  oxygenLevel: 10
+  _forwardForce: 2.2
   _backwardForce: 1
-  nuts: 5
-  bolts: 10
-  wires: 0
+  nuts: 4
+  bolts: 2
+  wires: 1
+  category: 

@@ -12,8 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d2a96b58fc75424b8d43da905680339, type: 3}
   m_Name: Advanced
   m_EditorClassIdentifier: Assembly-CSharp::LuresSO
-  Wires: 15
-  Huts: 20
-  Bolts: 10
+  Wires: 6
+  Huts: 10
+  Bolts: 6
   type: mid
   name: Vobble lure
+  fishesToCatch:
+  - {fileID: 1711321429722611452, guid: 0e079b49eed3f51449f594621f2ce6a1, type: 3}
+  - {fileID: 1711321429722611452, guid: 23f7eb9a91a288d4fbf86860596716b8, type: 3}
+  - {fileID: 1711321429722611452, guid: 3f0cc6370b61e0744aa6647fe5019384, type: 3}
+  - {fileID: 1711321429722611452, guid: f14e1e3ef1494174b81ee941cd9ad843, type: 3}
+  catchChance:
+  - 25
+  - 50
+  - 75
+  - 100
