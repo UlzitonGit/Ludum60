@@ -155,6 +155,7 @@ public class Cuttable : MonoBehaviour
         
         if (_fish != null)
         {
+            _fish.StoreFish(_hook.transform);
             _hook.SetFish(_fish);
             _fish = null;
         }

@@ -17,10 +17,10 @@ MonoBehaviour:
   name: tuna
   description: verity
   sprite: {fileID: 21300000, guid: ce611467c3b425a41bf220b1490bcdb7, type: 3}
-  bloodLevel: 20
-  oxygenLevel: 50
+  bloodLevel: 10
+  oxygenLevel: 15
   _forwardForce: 2
   _backwardForce: 1
-  nuts: 50
-  bolts: 20
+  nuts: 5
+  bolts: 10
   wires: 0
