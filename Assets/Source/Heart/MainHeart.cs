@@ -13,6 +13,12 @@ public class MainHeart : MonoBehaviour
     [SerializeField] private float maxFe;
     
     private InputHandler _inputHandler;
+
+    private float _fishActivity = 1;
+
+    private float _rodPower = 1;
+
+    private float _decreaseSpeed = 1;
     
     private Hook _hook;
     
@@ -48,7 +54,7 @@ public class MainHeart : MonoBehaviour
         }
     }
 
-    private void AddOxygen(int amount)
+    public void AddOxygen(int amount)
     {
         oxygen += amount;
         if(oxygen > maxOxygen) oxygen = maxOxygen;
@@ -56,7 +62,7 @@ public class MainHeart : MonoBehaviour
         oxygenBar.fillAmount = oxygen / maxOxygen;
     }
 
-    private void AddFee(int amount)
+    public void AddFee(int amount)
     {
         fe += amount;
         if(fe > maxFe) fe = maxFe;
@@ -64,11 +70,37 @@ public class MainHeart : MonoBehaviour
         feBar.fillAmount = fe / maxFe;
     }
 
+    public void SetFishActivity(float fishActivity)
+    {
+        this._fishActivity = fishActivity;
+    }
+
+    public void SetRodPower(float rodPower)
+    {
+        this._rodPower = rodPower;
+    }
+
+    public void SetDecreaseSpeed(float decreaseSpeed)
+    {
+        this._decreaseSpeed = decreaseSpeed;
+    }
+
+    public float GetFishActivity()
+    {
+        return this._fishActivity;
+    }
+
+    public float GetRodPower()
+    {
+        return this._rodPower;
+    }
+    
+
     IEnumerator DecreaseStats()
     {
         yield return new WaitForSeconds(2f);
-        oxygen -= 1;
-        fe -= 1;
+        oxygen -= _decreaseSpeed;
+        fe -= _decreaseSpeed;
         
         print(oxygen / maxOxygen);
         

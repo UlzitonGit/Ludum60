@@ -10,6 +10,8 @@ public class GameplayInstaller : MonoInstaller
      [SerializeField] private FishingRodController _fishingRodController;
      
      [SerializeField] private FishBucket _fishBucket;
+     
+     [SerializeField] private MainHeart _heart;
     
     
     public override void InstallBindings()
@@ -29,5 +31,7 @@ public class GameplayInstaller : MonoInstaller
         Container.Bind<FishingRodController>().FromInstance(_fishingRodController).AsSingle();
         
         Container.Bind<FishBucket>().FromInstance(_fishBucket).AsSingle();
+        
+        Container.Bind<MainHeart>().FromInstance(_heart).AsSingle();
     }
 }
