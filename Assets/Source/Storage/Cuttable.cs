@@ -20,6 +20,8 @@ public class Cuttable : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _fishWire;
     [SerializeField] private TextMeshProUGUI _fishBolts;
     
+    [SerializeField] private Animator[] _bloodAnimator;
+    
     private bool _isOpened;
     
     private Fish _fish;
@@ -39,7 +41,8 @@ public class Cuttable : MonoBehaviour
     private ResourcesManager _resourcesManager;
     
     private bool inZone;
-    
+
+    private int effect;
     [Inject]
     public void Construct(InputHandler inputHandler, Hook hook, FishingRodController fishingRodController, ResourcesManager resourcesManager)
     {
@@ -59,7 +62,8 @@ public class Cuttable : MonoBehaviour
     private void OpenStore(bool click)
     {
         if(!inZone || !_hook.HasFish()) return;
-        
+
+        effect = 0;
         _isOpened = true;
         
         Cursor.lockState = CursorLockMode.None;
@@ -94,10 +98,13 @@ public class Cuttable : MonoBehaviour
 
     public void Hit(bool click)
     {
-        if (click && _canHit && _isOpened)
+        if (click && _canHit && _isOpened && _fish != null)
         {
             _hammerAnim.SetTrigger("Hit");
+            _bloodAnimator[effect].SetTrigger("Blood");
             StartCoroutine(Delay());
+            
+            effect++;
         }
     }
 
