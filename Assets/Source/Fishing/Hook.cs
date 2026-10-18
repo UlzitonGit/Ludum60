@@ -18,14 +18,17 @@ public class Hook : MonoBehaviour
     private Fish _fish;
     
     private bool _isOnHook = false;
+
+    private MainHeart _heart;
     
     private bool _isCasted;
     
     public bool IsOnHook => _isOnHook;
 
     [Inject]
-    public void Construct(FishingRodController fishingRodController)
+    public void Construct(FishingRodController fishingRodController, MainHeart heart)
     {
+        _heart = heart;
         _fishingRodController = fishingRodController;
     }
 
@@ -51,6 +54,7 @@ public class Hook : MonoBehaviour
     public void ApplyForwardImpulse(Transform target, float impulseForce)
     {
         if (target == null) return;
+        
         
         _hookRb.AddForce(target.forward * impulseForce, ForceMode.Impulse);
     }
@@ -78,7 +82,7 @@ public class Hook : MonoBehaviour
                 BackToSpp(true);
             }
 
-            _hookRb.AddForce(direction * forward * (impulseForce * _fish.GetForwardForce()), ForceMode.Impulse);
+            _hookRb.AddForce(direction * forward * (impulseForce * _fish.GetForwardForce()) * _heart.GetRodPower(), ForceMode.Impulse);
         }
         if (forward == -1)
         {
@@ -88,7 +92,7 @@ public class Hook : MonoBehaviour
             {
                 BackToSpp();
             }
-            _hookRb.AddForce(direction * forward * (impulseForce * _fish.GetBackwardForce()), ForceMode.Impulse);
+            _hookRb.AddForce(direction * forward * (impulseForce * _fish.GetBackwardForce()) / _heart.GetRodPower() , ForceMode.Impulse);
         }
         
         

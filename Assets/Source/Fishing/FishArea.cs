@@ -19,12 +19,14 @@ public class FishArea : MonoBehaviour
     
     private Hook hook;
     
+    private MainHeart _heart;
+    
     private FishingMinigame minigame;
     
     [Inject]
-        public void Construct(FishingMinigame minigame, Hook hook)
+        public void Construct(FishingMinigame minigame, Hook hook, MainHeart heart)
     {
-        
+        _heart = heart;
         this.minigame = minigame;
         this.hook = hook;
     }
@@ -53,7 +55,7 @@ public class FishArea : MonoBehaviour
 
     IEnumerator Delay()
     {
-        yield return new WaitForSeconds(Random.Range(durationBorders[0], durationBorders[1]));
+        yield return new WaitForSeconds(Random.Range(durationBorders[0] / _heart.GetFishActivity(), durationBorders[1] / _heart.GetFishActivity()));
 
         List<Fish> fishesToCatch = new List<Fish>();
         

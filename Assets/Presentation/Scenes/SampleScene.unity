@@ -32460,8 +32460,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FishArea
   fishesSo: {fileID: 11400000, guid: ceaf2ee5b76c84341afa69285fac2cb6, type: 2}
   durationBorders:
-  - 3
-  - 6
+  - 4
+  - 10
   fishingLine: {fileID: 397862649}
 --- !u!54 &796736577
 Rigidbody:
