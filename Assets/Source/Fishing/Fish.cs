@@ -8,6 +8,9 @@ public class Fish : MonoBehaviour
     [SerializeField] private Transform _scaleComponent;
     
     [SerializeField] private FishDataSO fishData;
+
+    [SerializeField] private Vector3 fightDirection;
+    [SerializeField] private GameObject _effects;
     
     private FishingLine _fishingLine;
     
@@ -18,6 +21,10 @@ public class Fish : MonoBehaviour
     private Transform _targetPos;
     
     private bool _isOnHook;
+
+    private bool _fightStarted;
+    
+    private bool _cached = false;
     
     private FishingMinigame _minigame;
 
@@ -41,7 +48,7 @@ public class Fish : MonoBehaviour
         _isOnHook = true;
         
         _backwardForce = fishData._backwardForce * _weight;
-        _forwardForce = fishData._forwardForce / _weight;
+        _forwardForce = fishData._forwardForce / (_weight / 2);
 
         StartCoroutine(Picking());
     }
@@ -49,6 +56,9 @@ public class Fish : MonoBehaviour
     private void Update()
     {
         transform.position = _targetPos.transform.position;
+        
+        if(_isStrike && !_cached)
+            _hook.MoveByTransform(fightDirection);
     }
 
     public void SetIsStrike(bool isStrike)
@@ -59,13 +69,19 @@ public class Fish : MonoBehaviour
         
         StopAllCoroutines();
         
+        _effects.SetActive(true);
+        
         _minigame.gameObject.SetActive(true);
+        
+        if(!_fightStarted)
+            StartCoroutine(ChangeDirection());
     }
 
     public void Cached()
     {
         _minigame.gameObject.SetActive(false);
-        
+        _cached = true;
+        _effects.SetActive(false);
         StopAllCoroutines();
     }
 
@@ -105,6 +121,19 @@ public class Fish : MonoBehaviour
     public FishDataSO GetFishData()
     {
         return fishData;
+    }
+
+    IEnumerator ChangeDirection()
+    {
+        _fightStarted = true;
+        if (!_cached)
+        {
+            yield return new WaitForSeconds(Random.Range(2f, 5f));
+        
+            fightDirection = new Vector3(fightDirection.x * -1, 0, fightDirection.z);
+        
+            StartCoroutine(ChangeDirection());
+        }
     }
 
     IEnumerator Picking()

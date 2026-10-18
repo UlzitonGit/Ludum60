@@ -54,12 +54,15 @@ public class Hook : MonoBehaviour
         
         _hookRb.AddForce(target.forward * impulseForce, ForceMode.Impulse);
     }
-    
+
+    public void MoveByTransform(Vector3 impulseForce)
+    {
+        transform.Translate(impulseForce * Time.deltaTime);
+    }
     public void ApplyImpulseInRod(int forward, float impulseForce)
     {
         
         print("strike");
-        _hookRb.linearVelocity = new Vector3(0, 0, 0);
         Vector3 posSpp = new Vector3(transform.position.x, 0, transform.position.z);
         
         Vector3 posRod = new Vector3(_hookSpp.position.x, 0, _hookSpp.position.z);

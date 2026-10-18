@@ -23,4 +23,6 @@ public class FishDataSO : ScriptableObject
     [SerializeField] public int bolts;
 
     [SerializeField] public int wires;
+
+    [SerializeField] public string category;
 }
