@@ -88,9 +88,9 @@ public class Cuttable : MonoBehaviour
         
         _hammerAnim.SetBool("Idle", true);
 
-        _fishNuts.text = _fish.GetFishData().nuts.ToString();
-        _fishWire.text = _fish.GetFishData().wires.ToString();
-        _fishBolts.text = _fish.GetFishData().bolts.ToString();
+        _fishNuts.text = _fish.GetNuts().ToString();
+        _fishWire.text = _fish.GetWires().ToString();
+        _fishBolts.text = _fish.GetBolts().ToString();
 
         StartCoroutine(StartAnim());
 
@@ -126,9 +126,9 @@ public class Cuttable : MonoBehaviour
         
         if (_fishHp <= 0)
         {
-            _resourcesManager.AddBolts(_fish.GetFishData().bolts);
-            _resourcesManager.AddNuts(_fish.GetFishData().nuts);
-            _resourcesManager.AddWires(_fish.GetFishData().wires);
+            _resourcesManager.AddBolts(_fish.GetBolts());
+            _resourcesManager.AddNuts(_fish.GetNuts());
+            _resourcesManager.AddWires(_fish.GetWires());
             
             Destroy(_fish.gameObject);
             _fish = null;

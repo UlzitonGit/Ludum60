@@ -20,7 +20,7 @@ MonoBehaviour:
   bloodLevel: 60
   oxygenLevel: 0
   _forwardForce: 2.2
-  _backwardForce: 1
+  _backwardForce: 0.4
   nuts: 0
   bolts: 4
   wires: 2
