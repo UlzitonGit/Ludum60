@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,14 +21,15 @@ public class BucketUIController : MonoBehaviour
     
     [SerializeField] private Button _removeFish;
 
-    private List<FishCard> _freeCards = new List<FishCard>();
+    public List<FishCard> _freeCards = new List<FishCard>();
     
-    private List<FishCard> _busyCards = new List<FishCard>();
+    public List<FishCard> _busyCards = new List<FishCard>();
     
     private FishBucket _fishBucket;
 
     private bool _isOpened;
 
+    private int _returnId;
 
     [Inject]
     public void Construct(FishBucket fishBucket)
@@ -68,6 +70,11 @@ public class BucketUIController : MonoBehaviour
         
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        foreach (var card in _busyCards)
+        {
+            card.UnSelect();
+        }
         
         _isOpened = false;
         _bucketCam.SetActive(false);
@@ -81,7 +88,8 @@ public class BucketUIController : MonoBehaviour
 
     public void AddFish()
     {
-       Fish fish = _fishBucket.Store();
+        Fish fish = _fishBucket.Store();
+        
        if (fish == null) return;
        
        if (_freeCards.Count > 0)
@@ -99,8 +107,48 @@ public class BucketUIController : MonoBehaviour
        }
     }
 
+    public void FishCardPicked(int index)
+    {
+        HideAllSelect(index);
+        
+        int cardPos = 0;
+        
+        foreach (var card in _busyCards)
+        {
+            if (card.GetId() == index)
+            {
+                _removeFish.gameObject.SetActive(true);
+                _addFish.gameObject.SetActive(false);
+                _returnId = cardPos;
+                break;
+            }
+
+            cardPos++;
+        }
+        
+    }
+
+    private void HideAllSelect(int i)
+    {
+        foreach (var card in _busyCards)
+        {
+            if(card.GetId() != i)
+                card.UnSelect();
+        }
+    }
+
     public void RemoveFish()
     {
+        if(_fishBucket.GetHook().HasFish()) return;
+        
+        FishCard card = _busyCards[_returnId];
+        card.HideInfo();
+        
+        _busyCards.RemoveAt(_returnId);
+        _freeCards.Add(card);
+        
+        _removeFish.gameObject.SetActive(false);
+        _fishBucket.RemoveFish(_returnId);
         
     }
 }

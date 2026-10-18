@@ -24,6 +24,8 @@ public class FishingRodController : MonoBehaviour
     
     private float _maxCastTimer = 2;
     
+    private bool _canCast = true;
+    
     [Inject]
     public void Construct(InputHandler input, Hook hook)
     {
@@ -60,6 +62,7 @@ public class FishingRodController : MonoBehaviour
 
     private void Cast(bool cast)
     {
+        if(!_canCast) return;
         if (_hook.IsOnHook && cast)
         {
             _hook.HookInteract();
@@ -105,6 +108,11 @@ public class FishingRodController : MonoBehaviour
             
             _animatorRod.SetBool("Casting", false);
         }
+    }
+
+    public void SetCanCast(bool canCast)
+    {
+        _canCast = canCast;
     }
 
     public void SetIsCasted(bool isCasted)

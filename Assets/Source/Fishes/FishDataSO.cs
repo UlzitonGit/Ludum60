@@ -17,4 +17,10 @@ public class FishDataSO : ScriptableObject
     [SerializeField] public float _forwardForce;
     
     [SerializeField] public float _backwardForce;
+
+    [SerializeField] public int nuts;
+
+    [SerializeField] public int bolts;
+
+    [SerializeField] public int wires;
 }

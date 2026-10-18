@@ -96,6 +96,9 @@ MonoBehaviour:
   _sprite: {fileID: 5267977914980697829}
   _bloodLevel: {fileID: 6537251823734257121}
   _oxygenLevel: {fileID: 6197161009525310353}
+  panelImage: {fileID: 7333576865905549287}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &2411768886036191576
 GameObject:
   m_ObjectHideFlags: 0

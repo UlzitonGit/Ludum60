@@ -16,7 +16,9 @@ public class InputHandler
 
     public event Action<bool> OnInteract;
 
-    public bool _isStoped;
+    private bool _isStoped;
+
+    private bool _stopMovement;
 
     public InputHandler()
     {
@@ -59,7 +61,7 @@ public class InputHandler
 
     private void HandleMove(InputAction.CallbackContext ctx)
     {
-        if(_isStoped) return;
+        if(_isStoped || _stopMovement) return;
         
         Vector2 value = ctx.ReadValue<Vector2>();
         
@@ -107,6 +109,19 @@ public class InputHandler
         else
         {
             _isStoped = isStoped;
+        }
+    }
+
+    public void SetStopMovement(bool stopMovement)
+    {
+        if (stopMovement)
+        {
+            _stopMovement = stopMovement;
+            _currentMove = new Vector2(0, 0);
+        }
+        else
+        {
+            _stopMovement = stopMovement;
         }
     }
 

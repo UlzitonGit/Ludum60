@@ -118,12 +118,12 @@ public class Hook : MonoBehaviour
     public void SetFish(Fish fish)
     {
         _fish = fish;
-        
+        _isOnHook = true;
     }
 
-    public Fish ThrowFish(Transform pos)
+    public Fish ThrowFish(Transform pos, bool rotate = false)
     {
-        _fish.StoreFish(pos);
+        _fish.StoreFish(pos, rotate);
         
         Fish fish = _fish;
         

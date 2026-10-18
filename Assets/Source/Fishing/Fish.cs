@@ -69,9 +69,14 @@ public class Fish : MonoBehaviour
         StopAllCoroutines();
     }
 
-    public void StoreFish(Transform pos)
+    public void StoreFish(Transform pos, bool rotate = false)
     {
         _targetPos = pos;
+
+        if (rotate == true)
+        {
+            transform.rotation = _targetPos.rotation;
+        }
     }
     public void BreakUp()
     {

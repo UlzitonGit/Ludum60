@@ -11,7 +11,7 @@ public class FishBucket : MonoBehaviour, IStorage
     
     private Hook _hook;
     
-    private List<Fish> _fishes = new List<Fish>();
+    private List<Fish> _fishes = new List<Fish>(5);
     
     private InputHandler _inputHandler;
 
@@ -58,11 +58,26 @@ public class FishBucket : MonoBehaviour, IStorage
         return null;
     }
 
+    public void RemoveFish(int fishId)
+    {
+        if(_hook.HasFish()) return;
+        
+        _fishes[fishId].StoreFish(_hook.transform);
+        
+        _hook.SetFish( _fishes[fishId]);
+        _fishes.RemoveAt(fishId);
+    }
+
     public void CloseStore()
     {
         _inputHandler.SetIsStoped(false);
         
         OnInteract?.Invoke(false);
+    }
+
+    public Hook GetHook()
+    {
+        return _hook;
     }
     
     private void OnTriggerStay(Collider other)

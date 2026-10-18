@@ -16,6 +16,10 @@ public class GameplayInstaller : MonoInstaller
     {
         InputHandler inputHandler = new InputHandler();
         
+        ResourcesManager resourcesManager = new ResourcesManager();
+        
+        Container.Bind<ResourcesManager>().FromInstance(resourcesManager).AsSingle();
+        
         Container.Bind<InputHandler>().FromInstance(inputHandler).AsSingle();
         
         Container.Bind<Hook>().FromInstance(_hook).AsSingle();
