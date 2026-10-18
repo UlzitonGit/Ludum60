@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Zenject;
 using Random = UnityEngine.Random;
 
 public class FishArea : MonoBehaviour
 {
-    [SerializeField] private Hook hook;
     
     [SerializeField] private FishesSO fishesSo;
     
@@ -13,7 +13,17 @@ public class FishArea : MonoBehaviour
     
     [SerializeField] private FishingLine fishingLine;
     
-    [SerializeField] private FishingMinigame minigame;
+    private Hook hook;
+    
+    private FishingMinigame minigame;
+    
+    [Inject]
+        public void Construct(FishingMinigame minigame, Hook hook)
+    {
+        
+        this.minigame = minigame;
+        this.hook = hook;
+    }
     
     private void OnTriggerEnter(Collider other)
     {

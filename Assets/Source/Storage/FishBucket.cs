@@ -5,20 +5,28 @@ using Zenject;
 
 public class FishBucket : MonoBehaviour, IStorage
 {
-    [SerializeField] private Hook _hook;
+    [SerializeField] private BucketUIController _bucketUIController;
     
-    private List<Fish> _fishes;
+    [SerializeField] private List<Transform> _fishSpp = new List<Transform>();
+    
+    private Hook _hook;
+    
+    private List<Fish> _fishes = new List<Fish>();
     
     private InputHandler _inputHandler;
 
     private bool inZone;
+    
+    public Action<bool> OnInteract { get; set; }
 
     [Inject]
-    public void Construct(InputHandler inputHandler)
+    public void Construct(InputHandler inputHandler, Hook hook)
     {
         _inputHandler = inputHandler;
 
-        _inputHandler.OnInteract += Store;
+        _hook = hook;
+
+        _inputHandler.OnInteract += OpenStore;
     }
 
 
@@ -28,12 +36,33 @@ public class FishBucket : MonoBehaviour, IStorage
         set => _fishes = value;
     }
 
-    private void Store(bool clicked)
+    private void OpenStore(bool click)
     {
-        if (inZone && _hook.HasFish())
+        if(!inZone && !click) return;
+        
+        _inputHandler.SetIsStoped(true);
+        
+        _bucketUIController.ShowBucket(_hook.HasFish());
+        OnInteract?.Invoke(true);
+    }
+
+    public Fish Store()
+    {
+   
+        if (inZone && _fishes.Count < 5)
         {
-            _hook.ThrowFish(transform);
+            _fishes.Add(_hook.Getfish());
+            return _hook.ThrowFish(_fishSpp[_fishes.Count - 1]);
         }
+
+        return null;
+    }
+
+    public void CloseStore()
+    {
+        _inputHandler.SetIsStoped(false);
+        
+        OnInteract?.Invoke(false);
     }
     
     private void OnTriggerStay(Collider other)
@@ -56,7 +85,7 @@ public class FishBucket : MonoBehaviour, IStorage
     {
         if (_inputHandler != null)
         {
-            _inputHandler.OnInteract -= Store;
+            _inputHandler.OnInteract -= OpenStore;
         }
     }
 
@@ -64,7 +93,7 @@ public class FishBucket : MonoBehaviour, IStorage
     {
         if (_inputHandler != null)
         {
-            _inputHandler.OnInteract += Store;
+            _inputHandler.OnInteract += OpenStore;
         }
     }
 }

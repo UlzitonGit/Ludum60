@@ -16,6 +16,8 @@ public class InputHandler
 
     public event Action<bool> OnInteract;
 
+    public bool _isStoped;
+
     public InputHandler()
     {
         _actions = new InputSystem_Actions();
@@ -57,6 +59,8 @@ public class InputHandler
 
     private void HandleMove(InputAction.CallbackContext ctx)
     {
+        if(_isStoped) return;
+        
         Vector2 value = ctx.ReadValue<Vector2>();
         
         _currentMove = value;
@@ -65,6 +69,8 @@ public class InputHandler
 
     private void HandleLook(InputAction.CallbackContext ctx)
     {
+        if(_isStoped) return;
+        
         Vector2 value = ctx.ReadValue<Vector2>();
         
         _lookVector = value;
@@ -72,6 +78,8 @@ public class InputHandler
 
     private void HandleCast(InputAction.CallbackContext ctx)
     {
+        if(_isStoped) return;
+        
         bool click = ctx.ReadValue<float>() > 0.5f;
         
         OnCast?.Invoke(click);
@@ -79,9 +87,27 @@ public class InputHandler
 
     private void HandleInteract(InputAction.CallbackContext ctx)
     {
+        if(_isStoped) return;
+        
         bool click = ctx.ReadValue<float>() > 0.5f;
         
         OnInteract?.Invoke(click);
+    }
+
+    public void SetIsStoped(bool isStoped)
+    {
+        if (isStoped)
+        {
+            _isStoped = isStoped;
+            
+            _currentMove = new Vector2(0, 0);
+
+            _lookVector = new Vector2(0, 0);
+        }
+        else
+        {
+            _isStoped = isStoped;
+        }
     }
 
     public Vector2 GetMovementDirection() => new(_currentMove.x, _currentMove.y);

@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public class Hook : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Hook : MonoBehaviour
     
     [SerializeField] private float _breakRadius;
     
-    [SerializeField] private FishingRodController _fishingRodController;
+    private FishingRodController _fishingRodController;
     
     private Fish _fish;
     
@@ -21,6 +22,12 @@ public class Hook : MonoBehaviour
     private bool _isCasted;
     
     public bool IsOnHook => _isOnHook;
+
+    [Inject]
+    public void Construct(FishingRodController fishingRodController)
+    {
+        _fishingRodController = fishingRodController;
+    }
 
     public void HookInteract()
     {
@@ -36,6 +43,7 @@ public class Hook : MonoBehaviour
         }
         else if (_isOnHook && _fish != null)
         {
+            _hookRb.linearVelocity = new Vector3(0, 0, 0);
             _fish.SetIsStrike(true);
         }
     }
@@ -51,6 +59,7 @@ public class Hook : MonoBehaviour
     {
         
         print("strike");
+        _hookRb.linearVelocity = new Vector3(0, 0, 0);
         Vector3 posSpp = new Vector3(transform.position.x, 0, transform.position.z);
         
         Vector3 posRod = new Vector3(_hookSpp.position.x, 0, _hookSpp.position.z);
@@ -109,6 +118,7 @@ public class Hook : MonoBehaviour
     public void SetFish(Fish fish)
     {
         _fish = fish;
+        
     }
 
     public Fish ThrowFish(Transform pos)
@@ -128,6 +138,11 @@ public class Hook : MonoBehaviour
     public bool HasFish()
     {
         return _fish != null;
+    }
+
+    public Fish Getfish()
+    {
+        return _fish;
     }
 
     public void SetIsOnHook(bool isOnHook)

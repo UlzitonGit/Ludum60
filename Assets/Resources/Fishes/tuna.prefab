@@ -78,8 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fish
   _scaleComponent: {fileID: 8386901836401028545}
-  _forwardForce: 2
-  _backwardForce: 1
+  fishData: {fileID: 11400000, guid: 7da7a4af1459deb44a2ccf2988ce0a7f, type: 2}
 --- !u!1 &8037792328299082748
 GameObject:
   m_ObjectHideFlags: 0

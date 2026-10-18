@@ -6,26 +6,29 @@ using Random = UnityEngine.Random;
 public class Fish : MonoBehaviour
 {
     [SerializeField] private Transform _scaleComponent;
-
-    [SerializeField] private float _forwardForce;
     
-    [SerializeField] private float _backwardForce;
+    [SerializeField] private FishDataSO fishData;
     
     private FishingLine _fishingLine;
     
     private float _weight;
     
     private Hook _hook;
+
+    private Transform _targetPos;
     
     private bool _isOnHook;
     
     private FishingMinigame _minigame;
 
     private bool _isStrike;
+
+    private float _backwardForce;
+    private float _forwardForce;
     
     public void Initialize(Hook hook, FishingLine fishingLine, FishingMinigame minigame)
     {
-        _weight = Random.Range(1, 3);
+        _weight = Random.Range(fishData.minWeight, fishData.maxWeight);
         
         _scaleComponent.localScale = new Vector3(0.5f * _weight, 0.5f * _weight,0.5f * _weight);
         _fishingLine = fishingLine;
@@ -34,17 +37,18 @@ public class Fish : MonoBehaviour
         
         _hook.SetFish(this);
         _hook.SetIsOnHook(true);
+        _targetPos = _hook.transform;
         _isOnHook = true;
         
-        _backwardForce *= _weight;
-        _forwardForce /= _weight;
+        _backwardForce = fishData._backwardForce * _weight;
+        _forwardForce = fishData._forwardForce / _weight;
 
         StartCoroutine(Picking());
     }
 
     private void Update()
     {
-        transform.position = _hook.transform.position;
+        transform.position = _targetPos.transform.position;
     }
 
     public void SetIsStrike(bool isStrike)
@@ -67,9 +71,7 @@ public class Fish : MonoBehaviour
 
     public void StoreFish(Transform pos)
     {
-        _hook.transform.position = pos.position;
-        
-        gameObject.SetActive(false);
+        _targetPos = pos;
     }
     public void BreakUp()
     {
@@ -87,12 +89,17 @@ public class Fish : MonoBehaviour
 
     public float GetForwardForce()
     {
-        return _forwardForce;
+        return  _forwardForce;
     }
 
     public float GetBackwardForce()
     {
         return _backwardForce;
+    }
+
+    public FishDataSO GetFishData()
+    {
+        return fishData;
     }
 
     IEnumerator Picking()

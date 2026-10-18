@@ -10,9 +10,9 @@ public class FishingRodController : MonoBehaviour
 
     [SerializeField] private Transform _camera;
 
-    [SerializeField] private Hook _hook;
-
     [SerializeField] private float _castSpeed;
+    
+    private Hook _hook;
     
     private InputHandler _inputHandler;
 
@@ -25,8 +25,10 @@ public class FishingRodController : MonoBehaviour
     private float _maxCastTimer = 2;
     
     [Inject]
-    public void Construct(InputHandler input)
+    public void Construct(InputHandler input, Hook hook)
     {
+        _hook = hook;
+        
         _inputHandler = input;
 
         _inputHandler.OnCast += Cast;

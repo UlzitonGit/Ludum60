@@ -3,19 +3,22 @@ using Zenject;
 
 public class FishingMinigame : MonoBehaviour
 { 
-    [SerializeField] private MiniGameArrow _minigameArrow;
     
     [SerializeField] private RectTransform _catchZone;
     
-    [SerializeField] private Hook _hook;
+    [SerializeField]  private MiniGameArrow _minigameArrow;
+    
+    private Hook _hook;
     
     private InputHandler _inputHandler;
 
     [Inject]
 
-    public void Construct(InputHandler inputHandler)
+    public void Construct(InputHandler inputHandler, Hook hook)
     {
         _inputHandler = inputHandler;
+        
+        _hook = hook;
 
         _inputHandler.OnCast += Strike;
         
