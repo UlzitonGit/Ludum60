@@ -9,8 +9,7 @@ public class FloatingShop : InteractiveTable
     [SerializeField] private GameObject[] upgrades;
     
     [SerializeField] private Animator animator;
-
-    [SerializeField] private GameObject _hint;
+    
 
     private int _upgrades;
     
@@ -41,6 +40,7 @@ public class FloatingShop : InteractiveTable
         {
             upgrades[_upgrades].SetActive(true);
         }
+        _hint.SetActive(false);
     }
 
     public void Setup()
@@ -84,7 +84,8 @@ public class FloatingShop : InteractiveTable
         if (other.CompareTag("Player"))
         {
             inZone = true;
-            _hint.SetActive(true);
+            if(!_tutorialController.IsTutorial())
+                _hint.SetActive(true);
         }
     }
 

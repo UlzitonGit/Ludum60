@@ -142,6 +142,7 @@ public class FishingRodController : MonoBehaviour
     public void SetHasFish(bool hasFish)
     {
         _animatorRod.SetBool("HasFish", hasFish);
+        
     }
 
     public void SetCanCast(bool canCast)

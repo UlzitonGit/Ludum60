@@ -79,6 +79,8 @@ public class Cuttable : MonoBehaviour
     {
         if(!inZone || !_hook.HasFish()) return;
 
+        
+        _hint.SetActive(false);
         effect = 0;
         _isOpened = true;
         
@@ -227,7 +229,8 @@ public class Cuttable : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             inZone = true;
-            _hint.SetActive(true);
+            if(_hook.HasFish())
+                _hint.SetActive(true);
         }
     }
 

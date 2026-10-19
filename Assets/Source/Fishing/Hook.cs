@@ -17,6 +17,8 @@ public class Hook : MonoBehaviour
     
     [SerializeField] private TutorialStage _stage;
     
+    [SerializeField] private FishCard _fishCardPrefab; 
+    
     private FishingRodController _fishingRodController;
     
     private TutorialController _tutorialController;
@@ -142,6 +144,10 @@ public class Hook : MonoBehaviour
                 _stage.NextStage();
                 _catchTutor = true;
             }
+            _fishCardPrefab.gameObject.SetActive(true);
+            _fishCardPrefab.ShowInfo(_fish.GetFishData().name, _fish.GetFishData().description,
+                _fish.GetFishData().sprite, _fish.GetWeight(), 
+                _fish.GetFishData().oxygenLevel, _fish.GetFishData().bloodLevel);
             _fish.Cached();
         }
         _fishingRodController.SetIsCasted(false);
@@ -157,7 +163,10 @@ public class Hook : MonoBehaviour
         _fish = fish;
         _isOnHook = true;
         _fishingRodController.SetHasFish(_fish != null);
-        
+        if (fish == null)
+        {
+            _fishCardPrefab.gameObject.SetActive(false);
+        }
         if (!_tutorial && _fish != null && _tutorialController.GetStageIndex() == 4)
         {
             _stage.NextStage();
@@ -169,6 +178,7 @@ public class Hook : MonoBehaviour
     {
         _fish.StoreFish(pos, rotate);
         _fish.SetIsInWater(true);
+        _fishCardPrefab.gameObject.SetActive(false);
         
         Fish fish = _fish;
         _fishingRodController.SetHasFish(false);

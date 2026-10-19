@@ -49,6 +49,7 @@ public class FishBucket : MonoBehaviour, IStorage
     {
         if(!inZone && !click) return;
         
+        _hint.SetActive(false);
         _inputHandler.SetIsStoped(true);
         
         _bucketUIController.ShowBucket(_hook.HasFish());
