@@ -17,7 +17,7 @@ MonoBehaviour:
   name: Pileshko
   description: verity
   sprite: {fileID: 21300000, guid: ce611467c3b425a41bf220b1490bcdb7, type: 3}
-  bloodLevel: -80
+  bloodLevel: 80
   oxygenLevel: 10
   _forwardForce: 2
   _backwardForce: 0.4

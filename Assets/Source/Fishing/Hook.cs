@@ -12,6 +12,8 @@ public class Hook : MonoBehaviour
     [SerializeField] private float _pickRadius;
     
     [SerializeField] private float _breakRadius;
+
+    [SerializeField] private GameObject[] _lures;
     
     private FishingRodController _fishingRodController;
     
@@ -140,6 +142,15 @@ public class Hook : MonoBehaviour
         
         return fish;
         
+    }
+
+    public void SetHook(int id)
+    {
+        foreach (var lure in _lures)
+        {
+            lure.SetActive(false);
+        }
+        _lures[id].SetActive(true);
     }
 
     public bool HasFish()

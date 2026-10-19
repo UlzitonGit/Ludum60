@@ -41,6 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8386901836401028545}
+  - component: {fileID: 4213460870566051884}
   m_Layer: 0
   m_Name: Scale
   m_TagString: Untagged
@@ -61,9 +62,31 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6340089616277847318}
+  - {fileID: 8756075658854948566}
   m_Father: {fileID: 7173428780338194035}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &4213460870566051884
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3427606948962212130}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 671c8cbecdafd284b9cffec397775c13, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6029066737117444176
 GameObject:
   m_ObjectHideFlags: 0
@@ -4950,7 +4973,7 @@ MonoBehaviour:
   fishData: {fileID: 11400000, guid: 49ad1f91c535f504a85ade1db6e839c1, type: 2}
   fightDirection: {x: 1, y: 0, z: 1}
   _effects: {fileID: 903300448160012803}
---- !u!1 &8037792328299082748
+--- !u!1 &7772049852569231803
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4958,47 +4981,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6340089616277847318}
-  - component: {fileID: 3315164423777110920}
-  - component: {fileID: 6559450600699008855}
-  - component: {fileID: 169421564371556581}
+  - component: {fileID: 6710681626565408906}
+  - component: {fileID: 5408180650362065602}
+  - component: {fileID: 5083794978956089345}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: fish_cogs.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6340089616277847318
+--- !u!4 &6710681626565408906
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8037792328299082748}
+  m_GameObject: {fileID: 7772049852569231803}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0, z: -13.97995}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8386901836401028545}
+  m_Father: {fileID: 8756075658854948566}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3315164423777110920
+--- !u!33 &5408180650362065602
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8037792328299082748}
-  m_Mesh: {fileID: -5495902117074765545, guid: 5a990809ef05c94479f6520250047ddf, type: 3}
---- !u!23 &6559450600699008855
+  m_GameObject: {fileID: 7772049852569231803}
+  m_Mesh: {fileID: 5881986414364944424, guid: c13e804822b5ae84fbbd972959fee729, type: 3}
+--- !u!23 &5083794978956089345
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8037792328299082748}
+  m_GameObject: {fileID: 7772049852569231803}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -5017,7 +5039,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 5a990809ef05c94479f6520250047ddf, type: 3}
+  - {fileID: 2100000, guid: 3cea9571b8da2314c95dd79818460213, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5040,25 +5062,35 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &169421564371556581
-Animator:
-  serializedVersion: 7
+--- !u!1 &8270865968726410348
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8037792328299082748}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 671c8cbecdafd284b9cffec397775c13, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8756075658854948566}
+  m_Layer: 0
+  m_Name: fish_cogs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8756075658854948566
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8270865968726410348}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -0.30639648, y: -2.69, z: -19.36}
+  m_LocalScale: {x: 30.103422, y: 30.103422, z: 30.103422}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6710681626565408906}
+  m_Father: {fileID: 8386901836401028545}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}

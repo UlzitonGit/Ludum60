@@ -10,9 +10,9 @@ public abstract class ShopItem : MonoBehaviour, IShopItem
     [SerializeField] private TextMeshProUGUI _nutsText;
     [SerializeField] private TextMeshProUGUI _boltsText;
 
-    [SerializeField] private int _wires;
-    [SerializeField] private int _nuts;
-    [SerializeField] private int _bolts;
+    [SerializeField] protected int _wires;
+    [SerializeField] protected int _nuts;
+    [SerializeField] protected int _bolts;
     
     protected MainHeart heart;
 

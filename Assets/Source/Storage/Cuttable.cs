@@ -164,6 +164,8 @@ public class Cuttable : MonoBehaviour
         {
             _fish.StoreFish(_hook.transform);
             _hook.SetFish(_fish);
+            
+            _hammerAnim.SetBool("Idle", false);
             _fish = null;
         }
     }

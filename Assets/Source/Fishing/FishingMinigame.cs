@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 public class FishingMinigame : MonoBehaviour
 { 
@@ -27,6 +29,7 @@ public class FishingMinigame : MonoBehaviour
 
     private void Strike(bool strike)
     {
+        if(gameObject == null) return;
         if(!strike || !gameObject.activeInHierarchy) return;
         
         print("strike");
@@ -43,8 +46,15 @@ public class FishingMinigame : MonoBehaviour
 
         _catchZone.localPosition = new Vector3(Random.Range(-400f, 400f), 0, 0);
     }
-    
-    
+
+    private void OnDestroy()
+    {
+        if (_inputHandler != null)
+        {
+            _inputHandler.OnCast -= Strike;
+        }
+    }
+
     private void OnDisable()
     {
         if (_inputHandler != null)

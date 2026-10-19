@@ -15,12 +15,16 @@ public class InputHandler
     public event Action<bool> OnCast;
 
     public event Action<bool> OnInteract;
+    
+    public event Action<bool> OnPause;
 
     private bool _isStoped;
 
     private bool _stopMovement;
+    
+    private FishingRodController _fishingRodController;
 
-    public InputHandler()
+    public InputHandler(FishingRodController fishingRodController)
     {
         _actions = new InputSystem_Actions();
         
@@ -35,6 +39,10 @@ public class InputHandler
         
         _actions.Player.Interact.performed += HandleInteract;
         _actions.Player.Interact.canceled += HandleInteract;
+
+        _actions.Player.Pause.performed += SetupPause;
+        _actions.Player.Pause.canceled += SetupPause;
+        _fishingRodController = fishingRodController;
         
         _actions.Player.Enable();
     }
@@ -52,6 +60,10 @@ public class InputHandler
         
         _actions.Player.Interact.performed -= HandleInteract;
         _actions.Player.Interact.canceled -= HandleInteract;
+        
+        _actions.Player.Pause.performed -= SetupPause;
+        _actions.Player.Pause.canceled -= SetupPause;
+        
         _actions.Player.Disable();
         _currentMove = Vector2.zero;
       
@@ -67,6 +79,13 @@ public class InputHandler
         
         _currentMove = value;
       
+    }
+
+    private void SetupPause(InputAction.CallbackContext ctx)
+    {
+        bool click = ctx.ReadValue<float>() > 0.5f;
+        
+        OnPause?.Invoke(click);
     }
 
     private void HandleLook(InputAction.CallbackContext ctx)
@@ -110,6 +129,7 @@ public class InputHandler
         {
             _isStoped = isStoped;
         }
+        _fishingRodController.SetCanCast(!isStoped);
     }
 
     public void SetStopMovement(bool stopMovement)
@@ -123,6 +143,7 @@ public class InputHandler
         {
             _stopMovement = stopMovement;
         }
+        _fishingRodController.SetCanCast(!stopMovement);
     }
 
     public Vector2 GetMovementDirection() => new(_currentMove.x, _currentMove.y);

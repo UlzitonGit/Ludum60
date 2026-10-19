@@ -6,4 +6,8 @@ public class ActivityUpgrade : ShopItem
     {
         heart.SetFishActivity(2);
     }
+    public override void TryBuy()
+    {
+        _shop.TryBuy(_wires, _nuts, _bolts, this, true);
+    }
 }

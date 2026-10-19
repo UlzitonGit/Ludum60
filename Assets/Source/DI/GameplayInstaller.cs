@@ -16,7 +16,7 @@ public class GameplayInstaller : MonoInstaller
     
     public override void InstallBindings()
     {
-        InputHandler inputHandler = new InputHandler();
+        InputHandler inputHandler = new InputHandler(_fishingRodController);
         
         ResourcesManager resourcesManager = new ResourcesManager();
         

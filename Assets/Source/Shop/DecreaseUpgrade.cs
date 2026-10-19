@@ -6,4 +6,9 @@ public class DecreaseUpgrade : ShopItem
     {
         heart.SetDecreaseSpeed(0);
     }
+
+    public override void TryBuy()
+    {
+        _shop.TryBuy(_wires, _nuts, _bolts, this, true);
+    }
 }

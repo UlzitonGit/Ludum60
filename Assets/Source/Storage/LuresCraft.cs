@@ -26,6 +26,8 @@ public class LuresCraft : InteractiveTable
     
     private Lure _equipedLure;
 
+    private Hook _hook;
+
     private int _observingLure;
     
     private Lure _activeLure;
@@ -33,7 +35,7 @@ public class LuresCraft : InteractiveTable
     private bool _isCrafting;
     
     [Inject]
-    public void Construct(InputHandler inputHandler, ResourcesManager resourcesManager)
+    public void Construct(InputHandler inputHandler, ResourcesManager resourcesManager, Hook hook)
     {
         _resourcesManager = resourcesManager;
         
@@ -41,9 +43,15 @@ public class LuresCraft : InteractiveTable
 
         _inputHandler.OnInteract += OpenStore;
         
-        _equipedLure = _lures[0];
+        _activeLure = _lures[0];
+        
+        _equipedLure = _activeLure;
+        
+        _hook = hook;
         
         _fishArea.SetActiveLure(_equipedLure.LuresSO());
+        
+        ChooseLure();
     }
 
     protected override void OpenStore(bool click)
@@ -78,6 +86,18 @@ public class LuresCraft : InteractiveTable
     public void ChooseLure()
     {
         _equipedLure = _activeLure;
+
+        int i = 0;
+
+        foreach (Lure lure in _lures)
+        {
+            if (lure.LuresSO() == _equipedLure.LuresSO())
+            {
+                _hook.SetHook(i);
+            }
+
+            i++;
+        }
         
         SetLureInfo();
     }
