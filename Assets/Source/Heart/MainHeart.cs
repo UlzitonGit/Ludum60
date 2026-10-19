@@ -10,9 +10,16 @@ public class MainHeart : MonoBehaviour
     
     [SerializeField] private float maxOxygen;
     
+    [SerializeField] private TutorialStage tutorialStage;
+    
+    
     [SerializeField] private float maxFe;
+
+    private bool _tutor;
     
     private InputHandler _inputHandler;
+    
+    private TutorialController _tutorialController;
 
     private float _fishActivity = 1;
 
@@ -28,8 +35,10 @@ public class MainHeart : MonoBehaviour
     private bool inZone;
 
     [Inject]
-    public void Construct(InputHandler inputHandler, Hook hook)
+    public void Construct(InputHandler inputHandler, Hook hook, TutorialController tutorialController)
     {
+        
+        _tutorialController = tutorialController;
         oxygen = maxOxygen;
         fe = maxFe;
         
@@ -44,13 +53,18 @@ public class MainHeart : MonoBehaviour
 
     public void TryToFeed(bool click)
     {
-        if (inZone && _hook.HasFish())
+        if (inZone && _hook.HasFish() && _tutorialController.GetStageIndex() > 4)
         {
             AddFee(_hook.Getfish().GetFishData().bloodLevel);
             AddOxygen(_hook.Getfish().GetFishData().oxygenLevel);
             
            Fish fish = _hook.ThrowFish(transform);
            Destroy(fish.gameObject);
+           if (!_tutor)
+           {
+               tutorialStage.NextStage();
+               _tutor = true;
+           }
         }
     }
 

@@ -30,6 +30,8 @@ public class Hook : MonoBehaviour
     private bool _isCasted;
     
     private bool _tutorial;
+    
+    private bool _tutorialHook;
 
     private bool _catchTutor;
     
@@ -60,10 +62,10 @@ public class Hook : MonoBehaviour
             _hookRb.linearVelocity = new Vector3(0, 0, 0);
             _fish.SetIsStrike(true);
             
-            if (!_tutorial && _tutorialController.GetStageIndex() == 4)
+            if (!_tutorialHook && _tutorialController.GetStageIndex() == 4)
             {
                 _stage.NextStage();
-                _tutorial = true;
+                _tutorialHook = true;
             }
         }
     }
@@ -129,6 +131,11 @@ public class Hook : MonoBehaviour
         
         if (withFish)
         {
+            if (!_catchTutor)
+            {
+                _stage.NextStage();
+                _catchTutor = true;
+            }
             _fish.Cached();
         }
         _fishingRodController.SetIsCasted(false);
@@ -144,9 +151,10 @@ public class Hook : MonoBehaviour
         _fish = fish;
         _isOnHook = true;
         
-        if (!_tutorial && _tutorialController.GetStageIndex() == 4)
+        if (!_tutorial && _fish != null && _tutorialController.GetStageIndex() == 4)
         {
             _stage.NextStage();
+            _tutorial = true;
         }
     }
 

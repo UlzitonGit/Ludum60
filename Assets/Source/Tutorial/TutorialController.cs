@@ -28,7 +28,11 @@ public class TutorialController : MonoBehaviour
         {
             stages[stageIndex].gameObject.SetActive(false);
         }
-        if(stageIndex == stages.Length) return;
+        if(stageIndex == stages.Length - 1)
+        {
+            _isTutorial = false;
+            return;
+        }
         
         stageIndex++;
         stages[stageIndex].Initialize(this);

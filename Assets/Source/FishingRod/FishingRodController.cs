@@ -15,6 +15,8 @@ public class FishingRodController : MonoBehaviour
     private Hook _hook;
     
     private InputHandler _inputHandler;
+    
+    private TutorialController _tutorialController;
 
     private bool _startCasting;
 
@@ -27,8 +29,10 @@ public class FishingRodController : MonoBehaviour
     private bool _canCast = true;
     
     [Inject]
-    public void Construct(InputHandler input, Hook hook)
+    public void Construct(InputHandler input, Hook hook, TutorialController tutorialController)
     {
+        _tutorialController = tutorialController;
+        
         _hook = hook;
         
         _inputHandler = input;
@@ -62,7 +66,7 @@ public class FishingRodController : MonoBehaviour
 
     private void Cast(bool cast)
     {
-        if(!_canCast) return;
+        if(!_canCast || _tutorialController.GetStageIndex() < 4) return;
         if (_hook.IsOnHook && cast)
         {
             _hook.HookInteract();

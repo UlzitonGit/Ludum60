@@ -24,16 +24,26 @@ public class FloatingShop : InteractiveTable
 
     protected override void OpenStore(bool click)
     {
-        if(_tutorialController.IsTutorial()) return;
+        if(_tutorialController.IsTutorial() || !inZone) return;
         base.OpenStore(click);
-        if (inZone)
+        if (!inZone)
         {
-            animator.SetFloat("Speed", 0);
+            CloseStore();
+            return;
         }
+      
+        animator.SetFloat("Speed", 0);
         if (_upgrades < upgrades.Length)
         {
             upgrades[_upgrades].SetActive(true);
         }
+    }
+
+    public void Setup()
+    {
+        animator.SetTrigger("End");
+        CloseStore();
+        
     }
 
     public override void CloseStore()
@@ -62,6 +72,21 @@ public class FloatingShop : InteractiveTable
             }
                 
             shopItem.Purchase();
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            inZone = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            inZone = false;
         }
     }
 }
