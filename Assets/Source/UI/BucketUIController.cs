@@ -86,9 +86,9 @@ public class BucketUIController : MonoBehaviour
     }
 
 
-    public void AddFish()
+    public void AddFish(bool IsTutor = false)
     {
-        Fish fish = _fishBucket.Store();
+        Fish fish = _fishBucket.Store(IsTutor);
         
        if (fish == null) return;
        

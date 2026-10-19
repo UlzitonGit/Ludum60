@@ -29,6 +29,7 @@ public class Fish : MonoBehaviour
     private FishingMinigame _minigame;
 
     private bool _isStrike;
+    private bool _isInWater;
 
     private int _wireReward;
     private int _nutsReward;
@@ -37,7 +38,7 @@ public class Fish : MonoBehaviour
     private float _backwardForce;
     private float _forwardForce;
     
-    public void Initialize(Hook hook, FishingLine fishingLine, FishingMinigame minigame)
+    public void Initialize(Hook hook, FishingLine fishingLine, FishingMinigame minigame, bool isInWater = true)
     {
         _weight = Random.Range(fishData.minWeight, fishData.maxWeight);
         
@@ -46,8 +47,6 @@ public class Fish : MonoBehaviour
         _hook = hook;
         _minigame = minigame;
         
-        _hook.SetFish(this);
-        _hook.SetIsOnHook(true);
         _targetPos = _hook.transform;
         _isOnHook = true;
         
@@ -57,12 +56,19 @@ public class Fish : MonoBehaviour
         if(fishData.bolts > 0) _boltsReward = fishData.bolts + (int)_weight;
         if(fishData.nuts > 0) _nutsReward = fishData.nuts + (int)_weight;
         if(fishData.wires > 0)_wireReward = fishData.wires + (int)_weight;
+        
+        _isInWater = isInWater;
+        if(!isInWater) return;
+        
+        _hook.SetFish(this);
+        _hook.SetIsOnHook(true);
 
         StartCoroutine(Picking());
     }
 
     private void Update()
     {
+        if(!_isInWater) return;
         transform.position = _targetPos.transform.position;
         
         if(_isStrike && !_cached)
@@ -83,6 +89,11 @@ public class Fish : MonoBehaviour
         
         if(!_fightStarted)
             StartCoroutine(ChangeDirection());
+    }
+
+    public void SetIsInWater(bool isInWater)
+    {
+        _isInWater = isInWater;
     }
 
     public void Cached()

@@ -15,7 +15,11 @@ public class Hook : MonoBehaviour
 
     [SerializeField] private GameObject[] _lures;
     
+    [SerializeField] private TutorialStage _stage;
+    
     private FishingRodController _fishingRodController;
+    
+    private TutorialController _tutorialController;
     
     private Fish _fish;
     
@@ -25,11 +29,16 @@ public class Hook : MonoBehaviour
     
     private bool _isCasted;
     
+    private bool _tutorial;
+
+    private bool _catchTutor;
+    
     public bool IsOnHook => _isOnHook;
 
     [Inject]
-    public void Construct(FishingRodController fishingRodController, MainHeart heart)
+    public void Construct(FishingRodController fishingRodController, MainHeart heart, TutorialController tutorialController)
     {
+        _tutorialController = tutorialController;
         _heart = heart;
         _fishingRodController = fishingRodController;
     }
@@ -50,6 +59,12 @@ public class Hook : MonoBehaviour
         {
             _hookRb.linearVelocity = new Vector3(0, 0, 0);
             _fish.SetIsStrike(true);
+            
+            if (!_tutorial && _tutorialController.GetStageIndex() == 4)
+            {
+                _stage.NextStage();
+                _tutorial = true;
+            }
         }
     }
 
@@ -128,11 +143,17 @@ public class Hook : MonoBehaviour
     {
         _fish = fish;
         _isOnHook = true;
+        
+        if (!_tutorial && _tutorialController.GetStageIndex() == 4)
+        {
+            _stage.NextStage();
+        }
     }
 
     public Fish ThrowFish(Transform pos, bool rotate = false)
     {
         _fish.StoreFish(pos, rotate);
+        _fish.SetIsInWater(true);
         
         Fish fish = _fish;
         

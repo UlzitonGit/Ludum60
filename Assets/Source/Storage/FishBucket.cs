@@ -9,6 +9,9 @@ public class FishBucket : MonoBehaviour, IStorage
     
     [SerializeField] private List<Transform> _fishSpp = new List<Transform>();
     
+    [SerializeField] private TutorialStage _tutorialStage;
+    
+    
     private Hook _hook;
     
     private List<Fish> _fishes = new List<Fish>(5);
@@ -17,13 +20,17 @@ public class FishBucket : MonoBehaviour, IStorage
 
     private bool inZone;
     
+    private TutorialController _tutorialController;
+    
     public Action<bool> OnInteract { get; set; }
 
     [Inject]
-    public void Construct(InputHandler inputHandler, Hook hook)
+    public void Construct(InputHandler inputHandler, Hook hook, TutorialController tutorialController)
     {
         _inputHandler = inputHandler;
 
+        _tutorialController = tutorialController;
+        
         _hook = hook;
 
         _inputHandler.OnInteract += OpenStore;
@@ -46,10 +53,10 @@ public class FishBucket : MonoBehaviour, IStorage
         OnInteract?.Invoke(true);
     }
 
-    public Fish Store()
+    public Fish Store(bool isTutor = false)
     {
    
-        if (inZone && _fishes.Count < 5)
+        if ((inZone || isTutor) && _fishes.Count < 5)
         {
             _fishes.Add(_hook.Getfish());
             return _hook.ThrowFish(_fishSpp[_fishes.Count - 1]);
@@ -66,6 +73,11 @@ public class FishBucket : MonoBehaviour, IStorage
         
         _hook.SetFish( _fishes[fishId]);
         _fishes.RemoveAt(fishId);
+
+        if (_tutorialController.IsTutorial())
+        {
+            _tutorialStage.NextStage();
+        }
     }
 
     public void CloseStore()
@@ -78,6 +90,11 @@ public class FishBucket : MonoBehaviour, IStorage
     public Hook GetHook()
     {
         return _hook;
+    }
+
+    public BucketUIController GetBucketUIController()
+    {
+        return _bucketUIController;
     }
     
     private void OnTriggerStay(Collider other)

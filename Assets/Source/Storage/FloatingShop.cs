@@ -11,16 +11,20 @@ public class FloatingShop : InteractiveTable
     [SerializeField] private Animator animator;
 
     private int _upgrades;
+    
+    private TutorialController _tutorialController;
 
     [Inject]
-    public void Construct(ResourcesManager resourceManager)
+    public void Construct(ResourcesManager resourceManager, TutorialController tutorialController)
     {
         _resourceManager = resourceManager;
+        _tutorialController = tutorialController;
         animator.SetFloat("Speed", 1);
     }
 
     protected override void OpenStore(bool click)
     {
+        if(_tutorialController.IsTutorial()) return;
         base.OpenStore(click);
         if (inZone)
         {

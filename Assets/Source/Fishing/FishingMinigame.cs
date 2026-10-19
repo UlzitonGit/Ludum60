@@ -10,6 +10,10 @@ public class FishingMinigame : MonoBehaviour
     
     [SerializeField]  private MiniGameArrow _minigameArrow;
     
+    [SerializeField] private TutorialStage _stage;
+
+    private bool _tutorial;
+    
     private Hook _hook;
     
     private InputHandler _inputHandler;
@@ -69,6 +73,7 @@ public class FishingMinigame : MonoBehaviour
         {
             _inputHandler.OnCast += Strike;
         }
+        
         _catchZone.localPosition = new Vector3(Random.Range(-400f, 400f), 0, 0);
     }
 }

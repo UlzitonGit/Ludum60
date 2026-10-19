@@ -20,6 +20,8 @@ public class Cuttable : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _fishWire;
     [SerializeField] private TextMeshProUGUI _fishBolts;
     
+    [SerializeField] private TutorialStage _stage;
+    
     [SerializeField] private Animator[] _bloodAnimator;
     
     private bool _isOpened;
@@ -40,17 +42,21 @@ public class Cuttable : MonoBehaviour
     
     private ResourcesManager _resourcesManager;
     
+    private TutorialController _tutorialController;
+    
     private bool inZone;
 
     private int effect;
     [Inject]
-    public void Construct(InputHandler inputHandler, Hook hook, FishingRodController fishingRodController, ResourcesManager resourcesManager)
+    public void Construct(InputHandler inputHandler, Hook hook, FishingRodController fishingRodController, ResourcesManager resourcesManager, TutorialController tutorialController)
     {
         _resourcesManager = resourcesManager;
         
         _inputHandler = inputHandler;
         
         _fishingRodController = fishingRodController;
+        
+        _tutorialController = tutorialController;
 
         _hook = hook;
         
@@ -126,12 +132,21 @@ public class Cuttable : MonoBehaviour
         
         if (_fishHp <= 0)
         {
+            
             _resourcesManager.AddBolts(_fish.GetBolts());
             _resourcesManager.AddNuts(_fish.GetNuts());
             _resourcesManager.AddWires(_fish.GetWires());
             
             Destroy(_fish.gameObject);
             _fish = null;
+            
+            if (_tutorialController)
+            {
+                
+                CloseStore();
+                
+                _stage.NextStage();
+            }
             
         }
         

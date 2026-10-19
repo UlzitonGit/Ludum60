@@ -12,6 +12,10 @@ public class GameplayInstaller : MonoInstaller
      [SerializeField] private FishBucket _fishBucket;
      
      [SerializeField] private MainHeart _heart;
+     
+     [SerializeField] private TutorialController _tutorialController;
+     
+     [SerializeField] private Dialog[] _dialog;
     
     
     public override void InstallBindings()
@@ -22,7 +26,7 @@ public class GameplayInstaller : MonoInstaller
         
         Container.Bind<ResourcesManager>().FromInstance(resourcesManager).AsSingle();
         
-        Container.Bind<InputHandler>().FromInstance(inputHandler).AsSingle();
+        Container.Bind<InputHandler>().FromInstance(inputHandler).AsSingle().NonLazy();
         
         Container.Bind<Hook>().FromInstance(_hook).AsSingle();
         
@@ -33,5 +37,12 @@ public class GameplayInstaller : MonoInstaller
         Container.Bind<FishBucket>().FromInstance(_fishBucket).AsSingle();
         
         Container.Bind<MainHeart>().FromInstance(_heart).AsSingle();
+        
+        Container.Bind<TutorialController>().FromInstance(_tutorialController).AsSingle();
+
+        foreach (Dialog dialog in _dialog)
+        {
+            dialog.SetUP(inputHandler);
+        }
     }
 }

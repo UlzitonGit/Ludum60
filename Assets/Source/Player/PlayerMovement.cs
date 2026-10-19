@@ -22,8 +22,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _inputHandler = inputHandler;
         
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+      
     }
 
     private void FixedUpdate()

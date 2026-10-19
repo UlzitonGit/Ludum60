@@ -40,6 +40,15 @@ public class FishArea : MonoBehaviour
         }
     }
 
+    public Fish SpawnFish(Fish fish)
+    {
+        Fish spawnedFish = Instantiate(fish, hook.transform.position, Quaternion.identity).GetComponent<Fish>();
+        
+        spawnedFish.Initialize(hook, fishingLine, minigame, false);
+        
+        return spawnedFish;
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Hook"))
