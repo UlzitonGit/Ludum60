@@ -159,6 +159,8 @@ public class MainHeart : MonoBehaviour
         if (fe <= 0 || oxygen <= 0)
         {
             Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             _deathPanel.SetActive(true);
         }
         print(oxygen / maxOxygen);

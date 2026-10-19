@@ -1,5 +1,6 @@
 using System.Resources;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 public class FloatingShop : InteractiveTable
@@ -73,6 +74,14 @@ public class FloatingShop : InteractiveTable
                 if (_upgrades < upgrades.Length)
                 {
                     upgrades[_upgrades].SetActive(true);
+                }
+
+                if (_upgrades == 2)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    Time.timeScale = 1;
+                    SceneManager.LoadScene(2);
                 }
             }
                 
