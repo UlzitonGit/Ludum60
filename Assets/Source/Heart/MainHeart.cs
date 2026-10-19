@@ -16,6 +16,8 @@ public class MainHeart : MonoBehaviour
 
     [SerializeField] private Transform _spp;
 
+    [SerializeField] private GameObject _hint;
+
     [SerializeField] private GameObject _playerCam;
     [SerializeField] private GameObject _animCam;
     [SerializeField] private Animator _bloodAnimator;
@@ -69,6 +71,7 @@ public class MainHeart : MonoBehaviour
 
     IEnumerator Feed()
     {
+        _hint.SetActive(false);
         _inputHandler.SetStopMovement(true);
         
         
@@ -148,7 +151,7 @@ public class MainHeart : MonoBehaviour
 
     IEnumerator DecreaseStats()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
         oxygen -= _decreaseSpeed;
         fe -= _decreaseSpeed;
         
@@ -173,11 +176,12 @@ public class MainHeart : MonoBehaviour
             _inputHandler.OnInteract += TryToFeed;
         }
     }
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             inZone = true;
+            _hint.SetActive(true);
         }
     }
 
@@ -186,6 +190,7 @@ public class MainHeart : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             inZone = false;
+            _hint.SetActive(false);
         }
     }
 }

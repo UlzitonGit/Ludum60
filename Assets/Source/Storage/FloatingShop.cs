@@ -10,6 +10,8 @@ public class FloatingShop : InteractiveTable
     
     [SerializeField] private Animator animator;
 
+    [SerializeField] private GameObject _hint;
+
     private int _upgrades;
     
     private TutorialController _tutorialController;
@@ -51,6 +53,7 @@ public class FloatingShop : InteractiveTable
     public override void CloseStore()
     {
         base.CloseStore(); 
+        _hint.SetActive(false);
         animator.SetFloat("Speed", 1);
     }
 
@@ -76,11 +79,12 @@ public class FloatingShop : InteractiveTable
             shopItem.Purchase();
         }
     }
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             inZone = true;
+            _hint.SetActive(true);
         }
     }
 
@@ -89,7 +93,7 @@ public class FloatingShop : InteractiveTable
         if (other.CompareTag("Player"))
         {
             inZone = false;
-            
+            _hint.SetActive(false);
             CloseStore();
         }
     }

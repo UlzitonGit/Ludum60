@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Steel
   m_EditorClassIdentifier: Assembly-CSharp::LuresSO
   Wires: 5
-  Huts: 25
+  Huts: 15
   Bolts: 6
   type: mid
   name: Steel lure

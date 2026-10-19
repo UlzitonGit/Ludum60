@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         
         if (direction.sqrMagnitude > 1f) direction.Normalize();
         
-        Vector3 displacement = direction * settings.MovementSpeed * Time.deltaTime;
+        Vector3 displacement = direction * (settings.MovementSpeed * Time.deltaTime);
         
         _controller.Move(displacement);
     }
@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0f, _yaw, 0f);
         if (_camera != null)
-            _camera.transform.localRotation = Quaternion.Euler(_pitch, 0f, 0f);
+            _camera.transform.localRotation = Quaternion.Euler(_pitch * PlayerPrefs.GetFloat("Sensa"), 0f, 0f);
     }
     
     

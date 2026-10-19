@@ -10,6 +10,8 @@ public abstract class InteractiveTable : MonoBehaviour
     [SerializeField] protected GameObject _interactiveCam;
     
     protected bool _isOpened;
+
+    [SerializeField] protected GameObject _hint;
     
     protected InputHandler _inputHandler;
     
@@ -46,7 +48,7 @@ public abstract class InteractiveTable : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        
+        _hint.SetActive(false);
         _isOpened = false;
         
         _canvas.SetActive(false);
@@ -73,11 +75,12 @@ public abstract class InteractiveTable : MonoBehaviour
         }
     }
     
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             inZone = true;
+            _hint.SetActive(true);
         }
     }
 
@@ -86,6 +89,7 @@ public abstract class InteractiveTable : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             inZone = false;
+            _hint.SetActive(false);
         }
     }
 }

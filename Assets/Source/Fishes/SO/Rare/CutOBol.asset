@@ -23,5 +23,5 @@ MonoBehaviour:
   _backwardForce: 0.4
   nuts: 0
   bolts: 1
-  wires: 4
+  wires: 6
   category: 

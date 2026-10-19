@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d2a96b58fc75424b8d43da905680339, type: 3}
   m_Name: Bloody
   m_EditorClassIdentifier: Assembly-CSharp::LuresSO
-  Wires: 12
-  Huts: 16
-  Bolts: 8
+  Wires: 10
+  Huts: 25
+  Bolts: 10
   type: mid
   name: Bloody lure
   fishesToCatch:

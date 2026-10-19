@@ -17,11 +17,11 @@ MonoBehaviour:
   name: Verytish
   description: verity
   sprite: {fileID: 21300000, guid: ce611467c3b425a41bf220b1490bcdb7, type: 3}
-  bloodLevel: 10
+  bloodLevel: 15
   oxygenLevel: 50
   _forwardForce: 2.2
   _backwardForce: 0.4
   nuts: 2
-  bolts: 1
-  wires: 1
+  bolts: 2
+  wires: 3
   category: 

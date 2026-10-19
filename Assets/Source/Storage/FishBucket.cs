@@ -10,6 +10,8 @@ public class FishBucket : MonoBehaviour, IStorage
     [SerializeField] private List<Transform> _fishSpp = new List<Transform>();
     
     [SerializeField] private TutorialStage _tutorialStage;
+
+    [SerializeField] private GameObject _hint;
     
     
     private Hook _hook;
@@ -84,6 +86,8 @@ public class FishBucket : MonoBehaviour, IStorage
     {
         _inputHandler.SetIsStoped(false);
         
+        _hint.SetActive(false);
+        
         OnInteract?.Invoke(false);
     }
 
@@ -97,10 +101,11 @@ public class FishBucket : MonoBehaviour, IStorage
         return _bucketUIController;
     }
     
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            _hint.SetActive(true);
             inZone = true;
         }
     }
@@ -109,6 +114,7 @@ public class FishBucket : MonoBehaviour, IStorage
     {
         if (other.CompareTag("Player"))
         {
+            _hint.SetActive(false);
             inZone = false;
         }
     }

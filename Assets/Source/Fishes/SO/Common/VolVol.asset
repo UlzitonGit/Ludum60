@@ -21,7 +21,7 @@ MonoBehaviour:
   oxygenLevel: 15
   _forwardForce: 1.5
   _backwardForce: 0.4
-  nuts: 4
-  bolts: 1
+  nuts: 2
+  bolts: 2
   wires: 0
   category: 

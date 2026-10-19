@@ -44136,7 +44136,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 77703071}
   m_HandleRect: {fileID: 2003427685}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: -0.1
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0
@@ -70312,6 +70312,7 @@ MonoBehaviour:
   _audioMixer: {fileID: 24100000, guid: 948067f5b5cee94468fd38d07849832a, type: 2}
   _musicSlider: {fileID: 848454242}
   _sfxSlider: {fileID: 1348697925}
+  _Sensa: {fileID: 2042332334}
 --- !u!4 &1325739227
 Transform:
   m_ObjectHideFlags: 0
@@ -110489,16 +110490,16 @@ MonoBehaviour:
   m_FillRect: {fileID: 765048895}
   m_HandleRect: {fileID: 1756162432}
   m_Direction: 0
-  m_MinValue: -0.1
-  m_MaxValue: 1
+  m_MinValue: 0.2
+  m_MaxValue: 1.5
   m_WholeNumbers: 0
-  m_Value: 0.03
+  m_Value: 0.2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1325739226}
         m_TargetAssemblyTypeName: AudioSettings, Assembly-CSharp
-        m_MethodName: SetMusicVolume
+        m_MethodName: SetSense
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -15,6 +15,8 @@ public class LuresCraft : InteractiveTable
     
     [SerializeField] private Animator _animator;
 
+    [SerializeField] private GameObject _hint;
+
     [SerializeField] private TextMeshProUGUI _name;
 
     [SerializeField] private GameObject _chooseButton;

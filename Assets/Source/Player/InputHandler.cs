@@ -90,7 +90,7 @@ public class InputHandler
 
     private void HandleLook(InputAction.CallbackContext ctx)
     {
-        if(_isStoped) return;
+        if(_isStoped || _stopMovement) return;
         
         Vector2 value = ctx.ReadValue<Vector2>();
         

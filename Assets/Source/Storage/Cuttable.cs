@@ -16,6 +16,16 @@ public class Cuttable : MonoBehaviour
     
     [SerializeField] private ParticleSystem _fishParticles;
     
+    [SerializeField] private AudioPlayer _audioPlayer;
+    
+    [SerializeField] private AudioClip _fishHit;
+    
+    [SerializeField] private AudioClip _fishEXP;
+
+    [SerializeField] private GameObject _hint;
+    
+    
+    
     [SerializeField] private TextMeshProUGUI _fishNuts;
     [SerializeField] private TextMeshProUGUI _fishWire;
     [SerializeField] private TextMeshProUGUI _fishBolts;
@@ -133,6 +143,7 @@ public class Cuttable : MonoBehaviour
         if (_fishHp <= 0)
         {
             
+            _audioPlayer.Play(_fishEXP);
             _resourcesManager.AddBolts(_fish.GetBolts());
             _resourcesManager.AddNuts(_fish.GetNuts());
             _resourcesManager.AddWires(_fish.GetWires());
@@ -149,6 +160,10 @@ public class Cuttable : MonoBehaviour
             }
             
         }
+        else
+        {
+            _audioPlayer.Play(_fishHit);
+        }
         
         yield return new WaitForSeconds(1f);
         
@@ -164,6 +179,8 @@ public class Cuttable : MonoBehaviour
         _isOpened = false;
         
         _fishCanvas.SetActive(false);
+        
+        _hint.SetActive(false);
         
         _playerCam.SetActive(true);
         _bucketCam.SetActive(false);
@@ -205,11 +222,12 @@ public class Cuttable : MonoBehaviour
         }
     }
     
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             inZone = true;
+            _hint.SetActive(true);
         }
     }
 
@@ -217,6 +235,7 @@ public class Cuttable : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            _hint.SetActive(false);
             inZone = false;
         }
     }

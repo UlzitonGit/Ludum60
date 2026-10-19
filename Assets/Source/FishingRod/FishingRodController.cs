@@ -11,6 +11,16 @@ public class FishingRodController : MonoBehaviour
     [SerializeField] private Transform _camera;
 
     [SerializeField] private float _castSpeed;
+
+    [SerializeField] private GameObject _lineSound;
+    
+    [SerializeField] private AudioPlayer _audioPlayer;
+    
+    [SerializeField] private AudioClip _strike;
+    
+    [SerializeField] private AudioClip _miss;
+
+    [SerializeField] private AudioClip _cast;
     
     private Hook _hook;
     
@@ -64,12 +74,23 @@ public class FishingRodController : MonoBehaviour
         }
     }
 
+    public void PlayStrike()
+    {
+        _audioPlayer.Play(_strike);
+    }
+
+    public void PlayMiss()
+    {
+        _audioPlayer.Play(_miss);
+    }
+
     private void Cast(bool cast)
     {
         if(!_canCast || _tutorialController.GetStageIndex() < 4) return;
         if (_hook.IsOnHook && cast)
         {
             _hook.HookInteract();
+            
             _animatorRod.SetTrigger("Strike");
         }
         
@@ -109,9 +130,13 @@ public class FishingRodController : MonoBehaviour
             _hook.HookInteract();
             
             _hook.ApplyForwardImpulse(_camera, _castTimer * _castSpeed);
+
+            _audioPlayer.Play(_cast);
             
             _animatorRod.SetBool("Casting", false);
         }
+        
+        _lineSound.SetActive(_hook.IsOnHook);
     }
 
     public void SetHasFish(bool hasFish)

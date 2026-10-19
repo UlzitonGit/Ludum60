@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d2a96b58fc75424b8d43da905680339, type: 3}
   m_Name: Advanced
   m_EditorClassIdentifier: Assembly-CSharp::LuresSO
-  Wires: 6
-  Huts: 10
+  Wires: 0
+  Huts: 2
   Bolts: 6
   type: mid
   name: Vobble lure

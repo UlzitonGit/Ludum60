@@ -95,7 +95,9 @@ public class Hook : MonoBehaviour
         if (forward == 1)
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, _pickRadius, _layerMask);
-
+            
+            _fishingRodController.PlayStrike();
+            
             if (colliders.Length > 0)
             {
                 BackToSpp(true);
@@ -106,7 +108,9 @@ public class Hook : MonoBehaviour
         if (forward == -1)
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, _breakRadius, _layerMask);
-
+            
+            _fishingRodController.PlayMiss();
+            
             if (colliders.Length == 0)
             {
                 BackToSpp();

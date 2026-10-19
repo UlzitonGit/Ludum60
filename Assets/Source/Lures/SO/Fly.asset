@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Fly
   m_EditorClassIdentifier: Assembly-CSharp::LuresSO
   Wires: 0
-  Huts: 5
-  Bolts: 8
+  Huts: 10
+  Bolts: 5
   type: small
   name: Fly lure
   fishesToCatch:
