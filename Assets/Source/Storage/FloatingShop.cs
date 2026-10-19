@@ -87,6 +87,8 @@ public class FloatingShop : InteractiveTable
         if (other.CompareTag("Player"))
         {
             inZone = false;
+            
+            CloseStore();
         }
     }
 }

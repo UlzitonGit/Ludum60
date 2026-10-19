@@ -12,6 +12,13 @@ public class MainHeart : MonoBehaviour
     
     [SerializeField] private TutorialStage tutorialStage;
     
+    [SerializeField] private Animator animator;
+
+    [SerializeField] private Transform _spp;
+
+    [SerializeField] private GameObject _playerCam;
+    [SerializeField] private Animator _bloodAnimator;
+    
     
     [SerializeField] private float maxFe;
 
@@ -55,17 +62,43 @@ public class MainHeart : MonoBehaviour
     {
         if (inZone && _hook.HasFish() && _tutorialController.GetStageIndex() > 4)
         {
-            AddFee(_hook.Getfish().GetFishData().bloodLevel);
-            AddOxygen(_hook.Getfish().GetFishData().oxygenLevel);
-            
-           Fish fish = _hook.ThrowFish(transform);
-           Destroy(fish.gameObject);
-           if (!_tutor)
-           {
-               tutorialStage.NextStage();
-               _tutor = true;
-           }
+            StartCoroutine(Feed());
         }
+    }
+
+    IEnumerator Feed()
+    {
+        _inputHandler.SetStopMovement(true);
+        
+        
+        animator.SetTrigger("Feed");
+        
+        _playerCam.SetActive(false);
+        
+        AddFee(_hook.Getfish().GetFishData().bloodLevel);
+        AddOxygen(_hook.Getfish().GetFishData().oxygenLevel);
+            
+        
+        Fish fish = _hook.ThrowFish(_spp);
+        
+        yield return new WaitForSeconds(3f);
+        
+        _bloodAnimator.SetTrigger("Blood");
+        yield return new WaitForSeconds(2f);
+        
+        _inputHandler.SetStopMovement(false);
+        
+        
+        
+        _playerCam.SetActive(true);
+        
+        if (!_tutor)
+        {
+            tutorialStage.NextStage();
+            _tutor = true;
+        }
+        
+        Destroy(fish.gameObject);
     }
 
     public void AddOxygen(int amount)
@@ -112,7 +145,7 @@ public class MainHeart : MonoBehaviour
 
     IEnumerator DecreaseStats()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         oxygen -= _decreaseSpeed;
         fe -= _decreaseSpeed;
         
