@@ -126,6 +126,8 @@ public class Hook : MonoBehaviour
             _fish.BreakUp();
             _isOnHook = false;
             
+            _fishingRodController.SetHasFish(false);
+            
             _fish = null;
         }
         
@@ -150,6 +152,7 @@ public class Hook : MonoBehaviour
     {
         _fish = fish;
         _isOnHook = true;
+        _fishingRodController.SetHasFish(_fish != null);
         
         if (!_tutorial && _fish != null && _tutorialController.GetStageIndex() == 4)
         {
@@ -164,7 +167,7 @@ public class Hook : MonoBehaviour
         _fish.SetIsInWater(true);
         
         Fish fish = _fish;
-        
+        _fishingRodController.SetHasFish(false);
         _fish = null;
 
         _isOnHook = false;
