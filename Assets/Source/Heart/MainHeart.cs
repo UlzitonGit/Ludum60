@@ -17,6 +17,7 @@ public class MainHeart : MonoBehaviour
     [SerializeField] private Transform _spp;
 
     [SerializeField] private GameObject _playerCam;
+    [SerializeField] private GameObject _animCam;
     [SerializeField] private Animator _bloodAnimator;
     
     
@@ -74,6 +75,7 @@ public class MainHeart : MonoBehaviour
         animator.SetTrigger("Feed");
         
         _playerCam.SetActive(false);
+        _animCam.SetActive(true);
         
         AddFee(_hook.Getfish().GetFishData().bloodLevel);
         AddOxygen(_hook.Getfish().GetFishData().oxygenLevel);
@@ -86,6 +88,7 @@ public class MainHeart : MonoBehaviour
         _bloodAnimator.SetTrigger("Blood");
         yield return new WaitForSeconds(2f);
         
+        _animCam.SetActive(false);
         _inputHandler.SetStopMovement(false);
         
         

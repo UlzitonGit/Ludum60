@@ -42,7 +42,7 @@ public class Fish : MonoBehaviour
     {
         _weight = Random.Range(fishData.minWeight, fishData.maxWeight);
         
-        _scaleComponent.localScale = new Vector3(0.5f * _weight, 0.5f * _weight,0.5f * _weight);
+        _scaleComponent.localScale = new Vector3(_weight,_weight, _weight);
         _fishingLine = fishingLine;
         _hook = hook;
         _minigame = minigame;

@@ -24,6 +24,8 @@ public class FloatingShop : InteractiveTable
 
     protected override void OpenStore(bool click)
     {
+        print(inZone);
+        
         if(_tutorialController.IsTutorial() || !inZone) return;
         base.OpenStore(click);
         if (!inZone)
