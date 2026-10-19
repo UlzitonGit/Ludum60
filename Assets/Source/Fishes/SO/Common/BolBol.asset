@@ -15,7 +15,7 @@ MonoBehaviour:
   minWeight: 1
   maxWeight: 2
   name: BolBol
-  description: verity
+  description: A good source of oxygen.
   sprite: {fileID: -1734493952, guid: bac410d4d7bf34f4486edd7be7d349c6, type: 3}
   bloodLevel: 10
   oxygenLevel: 30

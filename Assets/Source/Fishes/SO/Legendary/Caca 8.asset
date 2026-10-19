@@ -15,7 +15,7 @@ MonoBehaviour:
   minWeight: 2
   maxWeight: 6
   name: Caca 8
-  description: verity
+  description: "Eight is the amount of it\u2019s organs."
   sprite: {fileID: -1746579174, guid: bac410d4d7bf34f4486edd7be7d349c6, type: 3}
   bloodLevel: 20
   oxygenLevel: 100

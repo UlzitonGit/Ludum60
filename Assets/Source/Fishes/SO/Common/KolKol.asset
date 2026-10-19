@@ -15,7 +15,7 @@ MonoBehaviour:
   minWeight: 1
   maxWeight: 3
   name: VolVol
-  description: verity
+  description: As spiky as a barbed wire.
   sprite: {fileID: 1859884945, guid: bac410d4d7bf34f4486edd7be7d349c6, type: 3}
   bloodLevel: 30
   oxygenLevel: 0

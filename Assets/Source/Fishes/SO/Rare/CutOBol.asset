@@ -15,7 +15,7 @@ MonoBehaviour:
   minWeight: 1
   maxWeight: 4
   name: CutOBol
-  description: verity
+  description: Not as big as it might seem.
   sprite: {fileID: -377916104, guid: e02d34c78d64a5c449d3c68f5fccb8d1, type: 3}
   bloodLevel: 20
   oxygenLevel: 20

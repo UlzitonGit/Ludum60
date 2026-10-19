@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FishDataSO
   minWeight: 1
   maxWeight: 4
-  name: CutOBol
-  description: verity
+  name: ChinChum
+  description: Straight from the factory.
   sprite: {fileID: 1787771980, guid: bac410d4d7bf34f4486edd7be7d349c6, type: 3}
   bloodLevel: 60
   oxygenLevel: 0

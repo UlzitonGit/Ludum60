@@ -15,7 +15,7 @@ MonoBehaviour:
   minWeight: 2
   maxWeight: 6
   name: Lavrak
-  description: verity
+  description: Balanced taste, yummy.
   sprite: {fileID: 1991675625, guid: bac410d4d7bf34f4486edd7be7d349c6, type: 3}
   bloodLevel: 40
   oxygenLevel: 50

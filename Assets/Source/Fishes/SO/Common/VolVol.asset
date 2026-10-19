@@ -15,7 +15,7 @@ MonoBehaviour:
   minWeight: 1
   maxWeight: 3
   name: VolVol
-  description: verity
+  description: Howls like a wolf.
   sprite: {fileID: -1029837344, guid: e02d34c78d64a5c449d3c68f5fccb8d1, type: 3}
   bloodLevel: 15
   oxygenLevel: 15

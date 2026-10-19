@@ -21,6 +21,8 @@ public class MainHeart : MonoBehaviour
     [SerializeField] private GameObject _playerCam;
     [SerializeField] private GameObject _animCam;
     [SerializeField] private Animator _bloodAnimator;
+
+    [SerializeField] private GameObject _deathPanel;
     
     
     [SerializeField] private float maxFe;
@@ -154,7 +156,11 @@ public class MainHeart : MonoBehaviour
         yield return new WaitForSeconds(4f);
         oxygen -= _decreaseSpeed;
         fe -= _decreaseSpeed;
-        
+        if (fe <= 0 || oxygen <= 0)
+        {
+            Time.timeScale = 0;
+            _deathPanel.SetActive(true);
+        }
         print(oxygen / maxOxygen);
         
         oxygenBar.fillAmount = oxygen / maxOxygen;

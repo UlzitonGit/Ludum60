@@ -53,9 +53,9 @@ public class Fish : MonoBehaviour
         _backwardForce = fishData._backwardForce * _weight;
         _forwardForce = fishData._forwardForce / (_weight / 2);
 
-        if(fishData.bolts > 0) _boltsReward = fishData.bolts + (int)_weight;
-        if(fishData.nuts > 0) _nutsReward = fishData.nuts + (int)_weight;
-        if(fishData.wires > 0)_wireReward = fishData.wires + (int)_weight;
+        if(fishData.bolts > 0) _boltsReward = fishData.bolts + (int)_weight * 2;
+        if(fishData.nuts > 0) _nutsReward = fishData.nuts + (int)_weight * 2 ;
+        if(fishData.wires > 0)_wireReward = fishData.wires + (int)_weight * 2;
         
         _isInWater = isInWater;
         if(!isInWater) return;

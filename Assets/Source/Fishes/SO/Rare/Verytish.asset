@@ -15,7 +15,7 @@ MonoBehaviour:
   minWeight: 1
   maxWeight: 4
   name: Verytish
-  description: verity
+  description: Honest fish, a little bit of everything
   sprite: {fileID: 124613759, guid: e02d34c78d64a5c449d3c68f5fccb8d1, type: 3}
   bloodLevel: 15
   oxygenLevel: 50

@@ -15,7 +15,7 @@ MonoBehaviour:
   minWeight: 2
   maxWeight: 6
   name: Pileshko
-  description: verity
+  description: Tastes like chicken.
   sprite: {fileID: -298682867, guid: e02d34c78d64a5c449d3c68f5fccb8d1, type: 3}
   bloodLevel: 80
   oxygenLevel: 10
