@@ -16,7 +16,7 @@ MonoBehaviour:
   maxWeight: 2
   name: Kartof
   description: verity
-  sprite: {fileID: 21300000, guid: ce611467c3b425a41bf220b1490bcdb7, type: 3}
+  sprite: {fileID: 631064626, guid: e02d34c78d64a5c449d3c68f5fccb8d1, type: 3}
   bloodLevel: 15
   oxygenLevel: -30
   _forwardForce: 1.5

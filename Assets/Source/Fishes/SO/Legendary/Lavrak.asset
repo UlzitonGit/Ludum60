@@ -16,7 +16,7 @@ MonoBehaviour:
   maxWeight: 6
   name: Lavrak
   description: verity
-  sprite: {fileID: 21300000, guid: ce611467c3b425a41bf220b1490bcdb7, type: 3}
+  sprite: {fileID: 1991675625, guid: bac410d4d7bf34f4486edd7be7d349c6, type: 3}
   bloodLevel: 40
   oxygenLevel: 50
   _forwardForce: 2

@@ -53,9 +53,9 @@ public class PlayerMovement : MonoBehaviour
         _pitch -= _smoothedLook.y * settings.RotationSpeed;
         _pitch  = Mathf.Clamp(_pitch, settings.MinPitch, settings.MaxPitch);
 
-        transform.rotation = Quaternion.Euler(0f, _yaw, 0f);
+        transform.rotation = Quaternion.Euler(0f, _yaw  * PlayerPrefs.GetFloat("Sensa"), 0f);
         if (_camera != null)
-            _camera.transform.localRotation = Quaternion.Euler(_pitch * PlayerPrefs.GetFloat("Sensa"), 0f, 0f);
+            _camera.transform.localRotation = Quaternion.Euler(_pitch  * PlayerPrefs.GetFloat("Sensa"), 0f, 0f);
     }
     
     

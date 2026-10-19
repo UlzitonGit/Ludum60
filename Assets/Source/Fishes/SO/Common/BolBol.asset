@@ -16,7 +16,7 @@ MonoBehaviour:
   maxWeight: 2
   name: BolBol
   description: verity
-  sprite: {fileID: 21300000, guid: ce611467c3b425a41bf220b1490bcdb7, type: 3}
+  sprite: {fileID: -1734493952, guid: bac410d4d7bf34f4486edd7be7d349c6, type: 3}
   bloodLevel: 10
   oxygenLevel: 30
   _forwardForce: 1.5

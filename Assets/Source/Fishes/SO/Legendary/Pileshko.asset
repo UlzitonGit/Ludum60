@@ -16,7 +16,7 @@ MonoBehaviour:
   maxWeight: 6
   name: Pileshko
   description: verity
-  sprite: {fileID: 21300000, guid: ce611467c3b425a41bf220b1490bcdb7, type: 3}
+  sprite: {fileID: -298682867, guid: e02d34c78d64a5c449d3c68f5fccb8d1, type: 3}
   bloodLevel: 80
   oxygenLevel: 10
   _forwardForce: 2
