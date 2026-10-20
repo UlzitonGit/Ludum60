@@ -23,5 +23,5 @@ MonoBehaviour:
   - {fileID: 1711321429722611452, guid: 23f7eb9a91a288d4fbf86860596716b8, type: 3}
   catchChance:
   - 10
-  - 40
+  - 50
   - 100

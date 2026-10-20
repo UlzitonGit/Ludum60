@@ -17,8 +17,8 @@ MonoBehaviour:
   name: Verytish
   description: Honest fish, a little bit of everything
   sprite: {fileID: 124613759, guid: e02d34c78d64a5c449d3c68f5fccb8d1, type: 3}
-  bloodLevel: 15
-  oxygenLevel: 50
+  bloodLevel: 35
+  oxygenLevel: 45
   _forwardForce: 2.2
   _backwardForce: 0.4
   nuts: 2

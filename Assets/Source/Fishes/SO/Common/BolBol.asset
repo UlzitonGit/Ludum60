@@ -18,7 +18,7 @@ MonoBehaviour:
   description: A good source of oxygen.
   sprite: {fileID: -1734493952, guid: bac410d4d7bf34f4486edd7be7d349c6, type: 3}
   bloodLevel: 10
-  oxygenLevel: 30
+  oxygenLevel: 25
   _forwardForce: 1.5
   _backwardForce: 0.4
   nuts: 3

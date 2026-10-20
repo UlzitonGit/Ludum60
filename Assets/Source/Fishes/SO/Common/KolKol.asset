@@ -18,7 +18,7 @@ MonoBehaviour:
   description: As spiky as a barbed wire.
   sprite: {fileID: 1859884945, guid: bac410d4d7bf34f4486edd7be7d349c6, type: 3}
   bloodLevel: 30
-  oxygenLevel: 0
+  oxygenLevel: 5
   _forwardForce: 1.5
   _backwardForce: 0.4
   nuts: 0

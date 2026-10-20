@@ -17,6 +17,8 @@ public class InputHandler
     public event Action<bool> OnInteract;
     
     public event Action<bool> OnPause;
+    
+    public event Action<bool> OnKnife;
 
     private bool _isStoped;
 
@@ -42,6 +44,9 @@ public class InputHandler
 
         _actions.Player.Pause.performed += SetupPause;
         _actions.Player.Pause.canceled += SetupPause;
+        
+        _actions.Player.Knife.performed += Knife;
+        _actions.Player.Knife.canceled += Knife;
         _fishingRodController = fishingRodController;
         
         _actions.Player.Enable();
@@ -64,6 +69,9 @@ public class InputHandler
         _actions.Player.Pause.performed -= SetupPause;
         _actions.Player.Pause.canceled -= SetupPause;
         
+        _actions.Player.Knife.performed -= Knife;
+        _actions.Player.Knife.canceled -= Knife;
+        
         _actions.Player.Disable();
         _currentMove = Vector2.zero;
       
@@ -79,6 +87,15 @@ public class InputHandler
         
         _currentMove = value;
       
+    }
+
+    private void Knife(InputAction.CallbackContext ctx)
+    {
+        if(_isStoped) return;
+        
+        bool click = ctx.ReadValue<float>() > 0.5f;
+        
+        OnKnife?.Invoke(click);
     }
 
     private void SetupPause(InputAction.CallbackContext ctx)

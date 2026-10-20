@@ -67,6 +67,8 @@ public class MainHeart : MonoBehaviour
         _inputHandler = inputHandler;
 
         _inputHandler.OnInteract += TryToFeed;
+
+        _inputHandler.OnKnife += TryToEnd;
         
         StartCoroutine(DecreaseStats());
     }
@@ -79,9 +81,9 @@ public class MainHeart : MonoBehaviour
         }
     }
 
-    private void TryToEnd()
+    private void TryToEnd(bool click)
     {
-        if (_floatingShop.GetHasKnife() && !isEnding)
+        if (_floatingShop.GetHasKnife() && !isEnding && !isFeeding)
         {
             StartCoroutine(End());
         }
@@ -139,10 +141,6 @@ public class MainHeart : MonoBehaviour
         _playerCam.SetActive(false);
         _animCam.SetActive(true);
         animator.SetTrigger("End");
-        
-        Fish fish = _hook.ThrowFish(_spp);
-               
-        Destroy(fish.gameObject);
         
         yield return new WaitForSeconds(26f);
 
@@ -219,6 +217,7 @@ public class MainHeart : MonoBehaviour
         if (_inputHandler != null)
         {
             _inputHandler.OnInteract -= TryToFeed;
+            _inputHandler.OnKnife -= TryToEnd;
         }
     }
 
@@ -227,6 +226,7 @@ public class MainHeart : MonoBehaviour
         if (_inputHandler != null)
         {
             _inputHandler.OnInteract += TryToFeed;
+            _inputHandler.OnKnife += TryToEnd;
         }
     }
     private void OnTriggerEnter(Collider other)
