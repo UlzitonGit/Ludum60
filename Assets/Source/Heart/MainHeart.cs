@@ -144,7 +144,7 @@ public class MainHeart : MonoBehaviour
                
         Destroy(fish.gameObject);
         
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(26f);
 
         isEnding = false;
         Time.timeScale = 1;
