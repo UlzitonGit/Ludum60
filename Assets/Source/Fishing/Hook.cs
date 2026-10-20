@@ -86,7 +86,7 @@ public class Hook : MonoBehaviour
     }
     public void ApplyImpulseInRod(int forward, float impulseForce)
     {
-        
+        if(_fish == null) BackToSpp();
         print("strike");
         Vector3 posSpp = new Vector3(transform.position.x, 0, transform.position.z);
         
@@ -94,7 +94,7 @@ public class Hook : MonoBehaviour
         
         Vector3 direction = (posRod - posSpp).normalized;
         
-        if (forward == 1)
+        if (forward == 1 && _fish != null)
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, _pickRadius, _layerMask);
             
@@ -107,7 +107,7 @@ public class Hook : MonoBehaviour
 
             _hookRb.AddForce(direction * forward * (impulseForce * _fish.GetForwardForce()) * _heart.GetRodPower(), ForceMode.Impulse);
         }
-        if (forward == -1)
+        if (forward == -1 && _fish != null)
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, _breakRadius, _layerMask);
             

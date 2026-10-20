@@ -13,6 +13,8 @@ public class FloatingShop : InteractiveTable
 
     [SerializeField] private GameObject _knife;
 
+    [SerializeField] private BoxCollider _boxCollider;
+
 
     private bool _hasKnife;
     
@@ -33,12 +35,16 @@ public class FloatingShop : InteractiveTable
         print(inZone);
         
         if(_tutorialController.IsTutorial() || !inZone) return;
-        base.OpenStore(click);
-        if (!inZone)
+        
+
+        
+        if (!inZone || !_boxCollider.enabled)
         {
             CloseStore();
             return;
         }
+        base.OpenStore(click);
+        
       
         animator.SetFloat("Speed", 0);
         if (_upgrades < upgrades.Length)
@@ -51,6 +57,8 @@ public class FloatingShop : InteractiveTable
     public void Setup()
     {
         animator.SetTrigger("End");
+        inZone = false;
+        _hint.SetActive(false);
         CloseStore();
         
     }
@@ -59,6 +67,7 @@ public class FloatingShop : InteractiveTable
     {
         base.CloseStore(); 
         _hint.SetActive(false);
+        inZone = false;
         animator.SetFloat("Speed", 1);
     }
 

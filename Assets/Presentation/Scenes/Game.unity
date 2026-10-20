@@ -475,6 +475,7 @@ MonoBehaviour:
   - {fileID: 1874546203}
   animator: {fileID: 10085235}
   _knife: {fileID: 913501151}
+  _boxCollider: {fileID: 10085236}
 --- !u!54 &10085238
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -108640,7 +108641,7 @@ Transform:
   m_GameObject: {fileID: 1347260111}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 77.59, y: 29.193, z: 97.59}
+  m_LocalPosition: {x: 77.42, y: 29.193, z: 97.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

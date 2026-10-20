@@ -166,4 +166,14 @@ public class InputHandler
     public Vector2 GetMovementDirection() => new(_currentMove.x, _currentMove.y);
     
     public Vector2 GetLookDirection() => new(_lookVector.x, _lookVector.y);
+
+    public bool IsStopped()
+    {
+        return _isStoped;
+    }
+
+    public bool MovementStopped()
+    {
+        return _stopMovement;
+    }
 }

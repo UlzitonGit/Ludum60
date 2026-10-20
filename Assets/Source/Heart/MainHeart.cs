@@ -234,7 +234,10 @@ public class MainHeart : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             inZone = true;
-            _hint.SetActive(true);
+            if (_hook.HasFish())
+            {
+                _hint.SetActive(true);
+            }
             if (_floatingShop.GetHasKnife())
             {
                 _hint2.SetActive(true);

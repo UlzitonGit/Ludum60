@@ -45,8 +45,11 @@ public class PauseController : MonoBehaviour
 
     public void PauseOff()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        if (!_inputHandler.IsStopped() && !_inputHandler.MovementStopped())
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;   
+        }
         _pauseMenu.SetActive(false);
         Time.timeScale = 1;
     }
