@@ -10,8 +10,12 @@ public class FloatingShop : InteractiveTable
     [SerializeField] private GameObject[] upgrades;
     
     [SerializeField] private Animator animator;
-    
 
+    [SerializeField] private GameObject _knife;
+
+
+    private bool _hasKnife;
+    
     private int _upgrades;
     
     private TutorialController _tutorialController;
@@ -76,17 +80,20 @@ public class FloatingShop : InteractiveTable
                     upgrades[_upgrades].SetActive(true);
                 }
 
-                if (_upgrades == 2)
+                if (_upgrades == 4)
                 {
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
-                    Time.timeScale = 1;
-                    SceneManager.LoadScene(2);
+                    _knife.SetActive(true);
+                    _hasKnife = true;
                 }
             }
                 
             shopItem.Purchase();
         }
+    }
+
+    public bool GetHasKnife()
+    {
+        return _hasKnife;
     }
     private void OnTriggerEnter(Collider other)
     {

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Zenject;
 
@@ -14,9 +15,12 @@ public class MainHeart : MonoBehaviour
     
     [SerializeField] private Animator animator;
 
+    [SerializeField] private FloatingShop _floatingShop;
+    
     [SerializeField] private Transform _spp;
 
     [SerializeField] private GameObject _hint;
+    [SerializeField] private GameObject _hint2;
 
     [SerializeField] private GameObject _playerCam;
     [SerializeField] private GameObject _animCam;
@@ -43,6 +47,10 @@ public class MainHeart : MonoBehaviour
     
     private float oxygen;
     private float fe;
+
+
+    private bool isFeeding;
+    private bool isEnding;
     
     private bool inZone;
 
@@ -65,15 +73,25 @@ public class MainHeart : MonoBehaviour
 
     public void TryToFeed(bool click)
     {
-        if (inZone && _hook.HasFish() && _tutorialController.GetStageIndex() > 4)
+        if (inZone && _hook.HasFish() && _tutorialController.GetStageIndex() > 4 && !isFeeding)
         {
             StartCoroutine(Feed());
+        }
+    }
+
+    private void TryToEnd()
+    {
+        if (_floatingShop.GetHasKnife() && !isEnding)
+        {
+            StartCoroutine(End());
         }
     }
 
     IEnumerator Feed()
     {
         _hint.SetActive(false);
+        isFeeding = true;
+        _hint2.SetActive(false);
         _inputHandler.SetStopMovement(true);
         
         
@@ -95,6 +113,7 @@ public class MainHeart : MonoBehaviour
         
         _animCam.SetActive(false);
         _inputHandler.SetStopMovement(false);
+        isFeeding = false;
         
         
         
@@ -107,6 +126,32 @@ public class MainHeart : MonoBehaviour
         }
         
         Destroy(fish.gameObject);
+    }
+    IEnumerator End()
+    {
+        _hint.SetActive(false);
+        _hint2.SetActive(false);
+        isEnding = true;
+        _inputHandler.SetStopMovement(true);
+        
+        
+        
+        _playerCam.SetActive(false);
+        _animCam.SetActive(true);
+        animator.SetTrigger("End");
+        
+        Fish fish = _hook.ThrowFish(_spp);
+               
+        Destroy(fish.gameObject);
+        
+        yield return new WaitForSeconds(3f);
+
+        isEnding = false;
+        Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        SceneManager.LoadScene(2);
+        
     }
 
     public void AddOxygen(int amount)
@@ -190,6 +235,10 @@ public class MainHeart : MonoBehaviour
         {
             inZone = true;
             _hint.SetActive(true);
+            if (_floatingShop.GetHasKnife())
+            {
+                _hint2.SetActive(true);
+            }
         }
     }
 
@@ -199,6 +248,7 @@ public class MainHeart : MonoBehaviour
         {
             inZone = false;
             _hint.SetActive(false);
+            _hint2.SetActive(false);
         }
     }
 }
