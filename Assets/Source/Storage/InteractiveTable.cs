@@ -12,15 +12,18 @@ public abstract class InteractiveTable : MonoBehaviour
     protected bool _isOpened;
 
     [SerializeField] protected GameObject _hint;
+
+    protected MainHeart _heart;
     
     protected InputHandler _inputHandler;
     
     protected bool inZone;
     
     [Inject]
-    public virtual void Construct(InputHandler inputHandler)
+    public virtual void Construct(InputHandler inputHandler, MainHeart heart)
     {
         _inputHandler = inputHandler;
+        _heart = heart;
 
         _inputHandler.OnInteract += OpenStore;
     }
@@ -52,8 +55,12 @@ public abstract class InteractiveTable : MonoBehaviour
         _isOpened = false;
         
         _canvas.SetActive(false);
-        
-        _playerCam.SetActive(true);
+
+        if (!_heart.GetIsFeeding() && !_heart.IsEnding())
+        {
+            _playerCam.SetActive(true);
+        }
+      
         _interactiveCam.SetActive(false);
         
         _inputHandler.SetStopMovement(false);

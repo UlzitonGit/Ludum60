@@ -33,7 +33,7 @@ public class FishArea : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Hook"))
+        if (other.CompareTag("Hook") && !hook.HasFish())
         {
             StartCoroutine(Delay());
             print(hook);
@@ -42,6 +42,8 @@ public class FishArea : MonoBehaviour
 
     public Fish SpawnFish(Fish fish)
     {
+        if(hook.HasFish()) return null;
+        
         Fish spawnedFish = Instantiate(fish, hook.transform.position, Quaternion.identity).GetComponent<Fish>();
         
         spawnedFish.Initialize(hook, fishingLine, minigame, false);
@@ -64,33 +66,40 @@ public class FishArea : MonoBehaviour
 
     IEnumerator Delay()
     {
-        yield return new WaitForSeconds(Random.Range(durationBorders[0] / _heart.GetFishActivity(), durationBorders[1] / _heart.GetFishActivity()));
-
-        List<Fish> fishesToCatch = new List<Fish>();
-        
-        foreach (var fishes in fishesSo.fishes)
+        if (!hook.HasFish())
         {
-            if (activeLure.fishesToCatch.Contains(fishes))
+            yield return new WaitForSeconds(Random.Range(durationBorders[0] / _heart.GetFishActivity(), durationBorders[1] / _heart.GetFishActivity()));
+
+            if (!hook.HasFish())
             {
-                fishesToCatch.Add(fishes);
+                List<Fish> fishesToCatch = new List<Fish>();
+        
+                foreach (var fishes in fishesSo.fishes)
+                {
+                    if (activeLure.fishesToCatch.Contains(fishes))
+                    {
+                        fishesToCatch.Add(fishes);
+                    }
+                }
+        
+                int chance = Random.Range(0, 100);
+
+                int i = 0;
+
+                foreach (int chanceC in activeLure.catchChance)
+                {
+                    if (chance < chanceC)
+                        break;
+                    i++;
+                }
+        
+                Fish fish = activeLure.fishesToCatch[i];
+        
+                Fish spawnedFish = Instantiate(fish, hook.transform.position, Quaternion.identity).GetComponent<Fish>();
+        
+                spawnedFish.Initialize(hook, fishingLine, minigame);
             }
+            
         }
-        
-        int chance = Random.Range(0, 100);
-
-        int i = 0;
-
-        foreach (int chanceC in activeLure.catchChance)
-        {
-            if (chance < chanceC)
-                break;
-            i++;
-        }
-        
-        Fish fish = activeLure.fishesToCatch[i];
-        
-        Fish spawnedFish = Instantiate(fish, hook.transform.position, Quaternion.identity).GetComponent<Fish>();
-        
-        spawnedFish.Initialize(hook, fishingLine, minigame);
     }
 }

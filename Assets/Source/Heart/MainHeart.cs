@@ -75,7 +75,7 @@ public class MainHeart : MonoBehaviour
 
     public void TryToFeed(bool click)
     {
-        if (inZone && _hook.HasFish() && _tutorialController.GetStageIndex() > 4 && !isFeeding)
+        if (inZone && _hook.HasFish() && _tutorialController.GetStageIndex() > 4 && !isFeeding && !isEnding && inZone)
         {
             StartCoroutine(Feed());
         }
@@ -91,43 +91,51 @@ public class MainHeart : MonoBehaviour
 
     IEnumerator Feed()
     {
-        _hint.SetActive(false);
-        isFeeding = true;
-        _hint2.SetActive(false);
-        _inputHandler.SetStopMovement(true);
+        if (!isEnding)
+        {
+            _hint.SetActive(false);
+            isFeeding = true;
+            _hint2.SetActive(false);
+            _inputHandler.SetStopMovement(true);
         
         
-        animator.SetTrigger("Feed");
+            animator.SetTrigger("Feed");
+            
+            print("feed");
         
-        _playerCam.SetActive(false);
-        _animCam.SetActive(true);
+            _playerCam.SetActive(false);
+            _animCam.SetActive(true);
         
-        AddFee(_hook.Getfish().GetFishData().bloodLevel);
-        AddOxygen(_hook.Getfish().GetFishData().oxygenLevel);
+            AddFee(_hook.Getfish().GetFishData().bloodLevel);
+            AddOxygen(_hook.Getfish().GetFishData().oxygenLevel);
             
         
-        Fish fish = _hook.ThrowFish(_spp);
+            Fish fish = _hook.ThrowFish(_spp);
         
-        yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(3f);
         
-        _bloodAnimator.SetTrigger("Blood");
-        yield return new WaitForSeconds(2f);
+            _bloodAnimator.SetTrigger("Blood");
+            yield return new WaitForSeconds(2f);
+            if (!isEnding)
+            {
+                _animCam.SetActive(false);
+                _inputHandler.SetStopMovement(false);
+                isFeeding = false;
+                print("feed");
         
-        _animCam.SetActive(false);
-        _inputHandler.SetStopMovement(false);
-        isFeeding = false;
+            
+                _playerCam.SetActive(true);
         
+                if (!_tutor)
+                {
+                    tutorialStage.NextStage();
+                    _tutor = true;
+                }
         
-        
-        _playerCam.SetActive(true);
-        
-        if (!_tutor)
-        {
-            tutorialStage.NextStage();
-            _tutor = true;
+                Destroy(fish.gameObject);
+            }
+            
         }
-        
-        Destroy(fish.gameObject);
     }
     IEnumerator End()
     {
@@ -191,6 +199,16 @@ public class MainHeart : MonoBehaviour
     public float GetRodPower()
     {
         return this._rodPower;
+    }
+
+    public bool GetIsFeeding()
+    {
+        return this.isFeeding;
+    }
+
+    public bool IsEnding()
+    {
+        return this.isEnding;
     }
     
 
