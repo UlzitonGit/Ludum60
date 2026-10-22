@@ -62,6 +62,8 @@ public class Fish : MonoBehaviour
         
         _hook.SetFish(this);
         _hook.SetIsOnHook(true);
+        
+        _hook.StartPicking();
 
         StartCoroutine(Picking());
     }

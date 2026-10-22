@@ -75,7 +75,7 @@ public class MainHeart : MonoBehaviour
 
     public void TryToFeed(bool click)
     {
-        if (inZone && _hook.HasFish() && _tutorialController.GetStageIndex() > 4 && !isFeeding && !isEnding && inZone)
+        if (inZone && _hook.HasFish() && _tutorialController.GetStageIndex() > 4 && !isFeeding && !isEnding)
         {
             StartCoroutine(Feed());
         }
@@ -83,7 +83,7 @@ public class MainHeart : MonoBehaviour
 
     private void TryToEnd(bool click)
     {
-        if (_floatingShop.GetHasKnife() && !isEnding && !isFeeding)
+        if (_floatingShop.GetHasKnife() && !isEnding && !isFeeding  && inZone)
         {
             StartCoroutine(End());
         }

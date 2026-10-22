@@ -22,6 +22,7 @@ public class FishingRodController : MonoBehaviour
 
     [SerializeField] private AudioClip _cast;
     
+    
     private Hook _hook;
     
     private InputHandler _inputHandler;

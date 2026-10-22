@@ -17,7 +17,9 @@ public class Hook : MonoBehaviour
     
     [SerializeField] private TutorialStage _stage;
     
-    [SerializeField] private FishCard _fishCardPrefab; 
+    [SerializeField] private FishCard _fishCardPrefab;
+    
+    [SerializeField] private GameObject _pickingPart;
     
     private FishingRodController _fishingRodController;
     
@@ -63,6 +65,7 @@ public class Hook : MonoBehaviour
         {
             _hookRb.linearVelocity = new Vector3(0, 0, 0);
             _fish.SetIsStrike(true);
+            _pickingPart.SetActive(false);
             
             if (!_tutorialHook && _tutorialController.GetStageIndex() == 4)
             {
@@ -70,6 +73,11 @@ public class Hook : MonoBehaviour
                 _tutorialHook = true;
             }
         }
+    }
+
+    public void StartPicking()
+    {
+        _pickingPart.SetActive(true);
     }
 
     public void ApplyForwardImpulse(Transform target, float impulseForce)
@@ -161,10 +169,12 @@ public class Hook : MonoBehaviour
     public void SetFish(Fish fish)
     {
         _fish = fish;
+        
         _isOnHook = true;
         _fishingRodController.SetHasFish(_fish != null);
         if (fish == null)
         {
+            _pickingPart.SetActive(false);
             _fishCardPrefab.gameObject.SetActive(false);
         }
         if (!_tutorial && _fish != null && _tutorialController.GetStageIndex() == 4)

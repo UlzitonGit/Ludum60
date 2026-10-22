@@ -16,7 +16,7 @@ MonoBehaviour:
   maxWeight: 6
   name: Bobrulka
   description: "It\u2019s tentacles are poisonous."
-  sprite: {fileID: -1137843195, guid: e02d34c78d64a5c449d3c68f5fccb8d1, type: 3}
+  sprite: {fileID: 324761702, guid: e02d34c78d64a5c449d3c68f5fccb8d1, type: 3}
   bloodLevel: -67
   oxygenLevel: -67
   _forwardForce: 2

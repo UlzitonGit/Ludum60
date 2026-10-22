@@ -16,7 +16,7 @@ MonoBehaviour:
   maxWeight: 4
   name: Kushtata 18
   description: "The result of an accident on the \u201Ckushtata 18\u201D factory. "
-  sprite: {fileID: -2053255044, guid: bac410d4d7bf34f4486edd7be7d349c6, type: 3}
+  sprite: {fileID: 631064626, guid: e02d34c78d64a5c449d3c68f5fccb8d1, type: 3}
   bloodLevel: -50
   oxygenLevel: 10
   _forwardForce: 2.2
