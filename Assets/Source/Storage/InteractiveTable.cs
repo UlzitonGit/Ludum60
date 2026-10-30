@@ -29,7 +29,7 @@ public abstract class InteractiveTable : MonoBehaviour
     }
     protected virtual void OpenStore(bool click)
     {
-        if(!inZone) return;
+        if(!inZone || _inputHandler.IsStopped() || _inputHandler.MovementStopped()  || Time.timeScale == 0) return;
         
         _isOpened = true;
         

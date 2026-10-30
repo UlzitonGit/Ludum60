@@ -77,8 +77,8 @@ public class Cuttable : MonoBehaviour
     }
     private void OpenStore(bool click)
     {
-        if(!inZone || !_hook.HasFish()) return;
-
+        if(!inZone || !_hook.HasFish()  || _inputHandler.IsStopped() || _inputHandler.MovementStopped()  || Time.timeScale == 0) return;
+        
         
         _hint.SetActive(false);
         effect = 0;

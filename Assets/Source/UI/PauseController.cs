@@ -55,6 +55,8 @@ public class PauseController : MonoBehaviour
     }
     public void ShowPauseMenu(bool click)
     {
+        if(_inputHandler.IsStopped() && !_inputHandler.MovementStopped()) return;
+        
         _started = !_started;
         _pauseMenu.SetActive(true);
         print(_started);

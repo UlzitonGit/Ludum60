@@ -47,7 +47,9 @@ public class FishBucket : MonoBehaviour, IStorage
 
     private void OpenStore(bool click)
     {
-        if(!inZone && !click) return;
+        if(!inZone && !click ) return;
+        
+        if(_inputHandler.IsStopped() || _inputHandler.MovementStopped() || Time.timeScale == 0) return;
         
         _hint.SetActive(false);
         _inputHandler.SetIsStoped(true);

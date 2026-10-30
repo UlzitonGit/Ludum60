@@ -33,7 +33,7 @@ public class FishingMinigame : MonoBehaviour
 
     private void Strike(bool strike)
     {
-        if(gameObject == null) return;
+        
         if(!strike || !gameObject.activeInHierarchy) return;
         
         print("strike");

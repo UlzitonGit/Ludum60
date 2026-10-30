@@ -16,11 +16,15 @@ public class GameplayInstaller : MonoInstaller
      [SerializeField] private TutorialController _tutorialController;
      
      [SerializeField] private Dialog[] _dialog;
+     
+     [SerializeField] private LocalizationManager _localizationManager;
     
     
     public override void InstallBindings()
     {
+        
         InputHandler inputHandler = new InputHandler(_fishingRodController);
+        
         
         ResourcesManager resourcesManager = new ResourcesManager();
         
@@ -29,6 +33,10 @@ public class GameplayInstaller : MonoInstaller
         Container.Bind<InputHandler>().FromInstance(inputHandler).AsSingle().NonLazy();
         
         Container.Bind<Hook>().FromInstance(_hook).AsSingle();
+        
+        Container.Bind<LocalizationManager>().FromInstance(_localizationManager).AsSingle();
+        
+        _localizationManager.Init();
         
         Container.Bind<FishingMinigame>().FromInstance(_minigame).AsSingle();
         
